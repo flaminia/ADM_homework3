@@ -1,0 +1,17 @@
+homework2/.idea/*
+homework2/*.xml
+homework3/.idea/*
+homework3/*.xml
+
+homework2/data
+homework2/.ipynb_checkpoints
+homework2/__pycache__
+homework2/logs
+#homework2/plots
+homework2/download_data.py
+homework2/download_data.py
+
+
+homework3/data
+homework3/.ipynb_checkpoints
+homework3/__pycache__
