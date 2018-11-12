@@ -1,10 +1,9 @@
 import nltk
 from os.path import isfile
 from nltk import word_tokenize
-from nltk.stem.snowball import ItalianStemmer, EnglishStemmer
-from nltk.corpus import stopwords, conll2007
+from nltk.stem.snowball import EnglishStemmer
+from nltk.corpus import stopwords
 from collections import defaultdict
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import time
 import numpy as np
@@ -110,7 +109,7 @@ class SearchEngine:
 
     @timeit
     def build_invert_idx(self, docs, read_fname="inverted_index.txt",
-                         write_fname="inverted_index.txt", processed=False):
+                         write_fname="inverted_index.txt"):
         """
         Build the inverted index for the terms in a collection of documents. Will load a
         previously build inverted index from file if it detects the file existing.
@@ -118,7 +117,6 @@ class SearchEngine:
         :param read_fname: str, filename of the inverted txt to load. Needs to be built in the
                               specified way of the method
         :param write_fname: str, filename to write the inverted index to.
-        :param processed: bool, have the documents already been preprocessed
         :return: dict, the inverted index with terms as keys and (doc_nr, relative_term_frequency)
                        as values.
         """
@@ -221,8 +219,6 @@ class SearchEngine:
         :param query: ndarray, list or similar; query terms in vector for (terms are strings)
         :return: dict, dictionary with term and weights associated to it
         """
-        if self.idf is None:
-            raise ValueError("Please build IDF values first.")
 
         n_terms = len(query)
         query_terms = Counter(query)
@@ -230,17 +226,14 @@ class SearchEngine:
         # drop all unseen before words, tfidf weight the rest
         query_dic = OrderedDict()
         for idx, term in enumerate(query_terms):
-            query_dic[term] = query_terms[term] / n_terms * self.idf[term]
+            query_dic[term] = query_terms[term] / n_terms * self.inv_index[term].idf
 
         return query_dic
 
     def search_query(self, query):
         query_proc = list(self.process_text(query))
         query_dic = self.tfidf_query(query_proc)
-        docs_terms = set(self.inv_index.keys())
-        query_terms = set(query_dic.keys())
-        all_terms = docs_terms.union(query_terms)
-        nr_terms = len(all_terms)
+        nr_terms = len(self.vocab)
         query_rep = np.array([0] * nr_terms, dtype="float32").reshape(1, -1)
         # we have an OrderedDict from the inverted index
         # so we can iterate over the items and place the vector representation
@@ -274,21 +267,3 @@ if __name__ == '__main__':
 
     se = SearchEngine()
 
-    # ads = fetch_ads(save_to_file=True).loc[:, ["Title", "Summary"]]
-    # ads["Ad"] = ads["Title"] + " " + ads["Summary"]
-    # ads.drop(columns=["Title", "Summary"], inplace=True)
-    # se = SearchEngine()
-    # se.build_idf(ads.values)
-    #
-    # query_res = []
-    # query_res.append(se.search_query("esperto computer graphico vero"))
-    # query_res.append(se.search_query(ads.loc[0, "Ad"][0:50]))  # first 50 characters of the first ad
-    # query_res.append(se.search_query(ads.loc[0, "Ad"]))  # first ad completely
-    # query_res.append(se.search_query(ads.loc[1, "Ad"]))  # second ad completely
-    # for query, sims in query_res:
-    #     print(f"Search query: {query if len(query) <= 100 else query[0:100] + '...'}")
-    #     print(f"Seach results:\n"
-    #           f"{'Document number'.center(25, ' ')}|{'Similarity'.center(15, ' ')}")
-    #     print(*[str(i).center(25, ' ') + '|' + str(sim.round(4)[0]).center(15, ' ') for i, sim in enumerate(sims)], sep="\n")
-    #
-    #
