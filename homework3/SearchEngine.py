@@ -14,6 +14,7 @@ import heapq
 from scipy import sparse
 from shutil import get_terminal_size
 import sys
+from datetime import datetime
 
 
 
@@ -38,14 +39,25 @@ class SearchEngine:
 
         self.vocab = None
         self.documents = None
-        self.nr_docs = None  # no documents yet available
         self.inv_index = None  # no inverted index yet available
         self.idf = None  # no inverse document frequency yet available
 
         self.nltk_check_downloaded()
 
+        # compute statistics of the data set
+        # (if the dataset became much larger this would need to be a continuously
+        # updated data file to read from, and periodically update)
+        docs = self._load_data_complete(as_dict=False)
+        self.nr_docs = docs.shape[0]
+        self.doc_nrs = docs.index
+        self.max_rate = docs["average_rate_per_night"].apply(lambda x: int(x[1:])).max()
+        self.max_nr_bedrooms = docs["bedrooms_count"].max()
+        self.most_recent = docs["date_of_listing"].apply(lambda x: datetime.strptime(x, "%B %Y")).max()
+        self.available_cities = pd.unique(docs["city"])
+
         if build_essentials:
-            self.build_invert_idx()
+            docs_text_parts = docs["title"] + " " + docs["description"]
+            self.build_invert_idx(docs_text_parts)
         self.built = build_essentials
 
     @timeit
@@ -56,37 +68,45 @@ class SearchEngine:
             self.vocab = set()
             for doc in docs.values():
                 self.vocab.update(doc)
-            self.vocab = pd.DataFrame(pd.Series(np.arange(len(self.vocab)), index=self.vocab), columns=["term_id"])
+            self.vocab = pd.DataFrame(pd.Series(np.arange(len(self.vocab)), index=self.vocab),
+                                      columns=["term_id"])
             self.vocab.to_csv(fname)
         else:
-            self.vocab = pd.read_csv(fname, index_col=0, header=0, keep_default_na=False, na_values=[""])
+            self.vocab = pd.read_csv(fname, index_col=0, header=0,
+                                     keep_default_na=False, na_values=[""])
 
     def _load_data_by_nr(self, doc_nrs):
         docs = dict()
         for doc_nr in doc_nrs:
-            docs[doc_nr] = pd.read_csv(f"{self.data_dir + self.proc_folder}doc_{doc_nr}.tsv", header=0, sep="\t")
+            docs[doc_nr] = pd.read_csv(f"{self.data_dir + self.proc_folder}doc_{doc_nr}.tsv",
+                                       header=0, sep="\t").set_index([[doc_nr]])
         return docs
 
     def _load_data_complete(self, as_dict=True):
         docs = pd.read_csv(f"{self.data_dir}Airbnb_Texas_Rentals.csv", header=0, sep=",")
         docs.drop(columns="Unnamed: 0", inplace=True)
+        docs = docs.dropna().drop_duplicates(subset=["title", "description", "city"])
+        docs.reset_index(drop=True, inplace=True)
         if as_dict:
             ds = dict()
-            for idx, doc in docs.iterrows():
-                ds[idx] = doc
+            for docnr, doc in docs.iterrows():
+                ds[docnr] = doc
             docs = ds
         return docs
 
     def _split_data_in_ads(self):
-        docs = self._load_data_complete()
-        for i, row in docs.items():
+        docs = self._load_data_complete(as_dict=False)
+        for i, row in docs.iterrows():
             row_to_frame = row.to_frame().T
-            row_to_frame.to_csv(f"{self.data_dir + self.proc_folder}doc_{i}.tsv", sep="\t", index=None)
+            row_to_frame.to_csv(
+                f"{self.data_dir + self.proc_folder}doc_{i}.tsv",
+                sep="\t", index=None
+            )
 
     @staticmethod
     def nltk_check_downloaded():
         try:
-            nltk.data.find('stopwords')
+            nltk.data.find('corpora/stopwords')
         except LookupError:
             nltk.download('stopwords')
         try:
@@ -116,15 +136,17 @@ class SearchEngine:
             docs = (docs["description"] + " " + docs["title"]).to_frame()
 
         if isinstance(docs, pd.DataFrame):
-            d_out = dict()
-            for idx, doc in docs.iterrows():
-                d_out[idx] = list(self._process_text(doc))
+            docs_generator = docs.iterrows()
+        elif isinstance(docs, pd.Series):
+            docs_generator = docs.iteritems()
         elif isinstance(docs, dict):
-            d_out = docs
-            for docnr, doc in docs.items():
-                d_out[docnr] = list(self._process_text(doc))
+            docs_generator = docs.items()
         else:
             raise ValueError("Container type has no handler.")
+
+        d_out = dict()
+        for docnr, doc in docs_generator:
+            d_out[docnr] = list(self._process_text(doc))
         return d_out
 
     @timeit
@@ -157,17 +179,11 @@ class SearchEngine:
                         doclist = list(map(lambda x: re.search("\d+,\s?(\d[.])?\d+", x).group().split(","),
                                            doclist.split(";")))
                         inv_index[term] = [TermSet(*list(map(float, docl))) for docl in doclist]
-            # recreate the number of documents used for the inverted index
-            nr_docs = set()
-            for term, doclist in inv_index.items():
-                nr_docs = nr_docs.union(doclist)
-            self.nr_docs = len(nr_docs)
         else:
             # the final inverted index container, defaultdict, so that new terms
-            # can be searched and get an empty set back
+            # can be searched and get an empty list back
             inv_index = defaultdict(list)
             docs, idf_dict, term_freqs, doc_counters = self._build_idf(docs)
-            self.nr_docs = len(doc_counters)
             for docnr, doc in docs.items():
                 # weird, frequency pairs for this document
                 freqs = doc_counters[docnr]
@@ -245,13 +261,19 @@ class SearchEngine:
         return query_dic
 
     @timeit
-    def _process_query_conjunctive(self, query):
+    def _process_query_rel_docs(self, query, conjunctive=True):
         query_proc = list(self._process_text(query))
+        if conjunctive:
+            cand_update = lambda set1, set2: set1.intersection(set2)
+            docs_to_search = set(self.doc_nrs)  # initialize with all the doc numbers
+        else:
+            cand_update = lambda set1, set2: set1.union(set2)
+            docs_to_search = set()  # initialize with empty set
         # Iterate over inverted index find which documents have the terms of the search.
-        # Iterate over the query terms by popping element 0 and cut the set of documents
-        # containing this term with the current set of candidates.
-        # In math: INTERSECT_{term in Vocab} {d in Documents: term in d}
-        docs_to_search = set(np.arange(self.nr_docs))  # initialize with all the doc numbers
+        # Iterate over the query terms by popping element 0 and cut (unite) the set of documents
+        # containing this term with the current set of candidates. In math terminology:
+        # INTERSECT_{term in Vocab} {d in Documents: term in d} or
+        # UNION_{term in Vocab} {d in Documents: term in d}
         query_terms = set(query_proc)  # the list to pop terms from
         while query_terms:
             term = query_terms.pop()
@@ -259,67 +281,122 @@ class SearchEngine:
                 # get the documents that contain this term
                 ds = [doc for doc, f in self.inv_index[term]]
                 # intersect all the relev docs in this set with the candidates
-                docs_to_search = docs_to_search.intersection(ds)
+                docs_to_search = cand_update(docs_to_search, ds)
             else:
                 # term isn't in vocabulary -> no document contains this term
                 # return no document as conjunctive query was unsuccessful
                 return query, None
 
         if not docs_to_search:  # equiv to empty set
-            return None  # no document contained all terms
+            return query, None  # no document contained all terms
 
         rel_docs = self._load_data_by_nr(docs_to_search)
 
         return query, rel_docs
 
     @timeit
-    def _process_query_cosinesim(self, query, top_k=10):
-        _, rel_docs = self._process_query_conjunctive(query)
+    def _process_query_cosinesim(self, query, top_k=10, conjunctive=True):
+        _, rel_docs = self._process_query_rel_docs(query, conjunctive)
         if rel_docs is not None:
-            query_proc = list(self._process_text(query))
-            query_dic = self.tfidf_query(query_proc)
-            col = []
-            row = []
-            data = []
-            for d_nr, content in rel_docs.items():
-                content = set(self._process_text(content["title"] + " " + content["description"]))
-                for term in content:
-                    col.append(self.vocab.loc[term, "term_id"])
-                    row.append(d_nr)
-                    for termset in self.inv_index[term]:
-                        if termset.docID == d_nr:
-                            data.append(termset.tfidf)
-                            break
-            shape = self.nr_docs, len(self.vocab)
-            docs_repr = sparse.csr_matrix((data, (row, col)), shape=shape, dtype=float)
-
-            col = []
-            row = []
-            data = []
-            for term, tfidf_weight in query_dic.items():
-                col.append(self.vocab.loc[term, "term_id"])
-                row.append(0)
-                data.append(tfidf_weight)
-            shape = 1, len(self.vocab)
-            query_rep = sparse.csr_matrix((data, (row, col)), shape=shape, dtype=float)
-
-            similarities = cosine_similarity(docs_repr, query_rep)
-            # load the documents to gain the top ones
-            docs = self._load_data_complete(as_dict=False)
-            docs.loc[:, "score"] = similarities
+            _, similarities = self._compute_cosine(query, rel_docs)
             # create heap for the top documents
-            top_heap = [(sim, docnr) for sim, docnr in zip(-similarities[:, 0], range(docs.shape[0]))]
+            top_heap = [(sim, docnr) for sim, docnr in zip(-similarities[:, 0], range(self.nr_docs))]
             heapq.heapify(top_heap)
             top_k_docs = []
             for i in range(top_k):
                 try:
                     sim, docnr = heapq.heappop(top_heap)
-                    top_k_docs.append(docs.loc[docnr])
+                    doc = rel_docs[docnr]
+                    docnr["score"] = -sim
+                    top_k_docs.append(doc)
                 except IndexError:
                     break  # no more elements in the heap
             return query, top_k_docs
         else:
             return query, None
+
+    def _compute_cosine(self, query, docs):
+        query_proc = list(self._process_text(query))
+        query_dic = self.tfidf_query(query_proc)
+        col = []
+        row = []
+        data = []
+        for d_nr, content in docs.items():
+            content = set(self._process_text(content["title"] + " " + content["description"]))
+            for term in content:
+                col.append(self.vocab.loc[term, "term_id"])
+                row.append(d_nr)
+                for termset in self.inv_index[term]:
+                    if termset.docID == d_nr:
+                        data.append(termset.tfidf)
+                        break
+        shape = self.nr_docs, len(self.vocab)
+        docs_repr = sparse.csr_matrix((data, (row, col)), shape=shape, dtype=float)
+
+        col = []
+        row = []
+        data = []
+        for term, tfidf_weight in query_dic.items():
+            col.append(self.vocab.loc[term, "term_id"])
+            row.append(0)
+            data.append(tfidf_weight)
+        shape = 1, len(self.vocab)
+        query_rep = sparse.csr_matrix((data, (row, col)), shape=shape, dtype=float)
+
+        similarities = cosine_similarity(docs_repr, query_rep)
+        return query, similarities
+
+    def _process_query_happy_score(self, query, info, top_k=10):
+
+        # get the top k cosine scored documents
+        _, rel_docs = self._process_query_rel_docs(query, conjunctive=False)
+        nr_docs = len(rel_docs)
+
+        d = pd.concat((doc for docnr, doc in rel_docs.items()))
+        d["cos_rank"] = range(1, nr_docs + 1)
+        d["rate"] = d["average_rate_per_night"].apply(lambda x: float(x[1:]))
+        d["date"] = d["date_of_listing"].apply(
+            lambda x: datetime.strptime(x, "%B %Y")
+        )
+        d["date_diff"] = d["date"].apply(
+            lambda x: (x - info["date_of_listing"]).total_seconds()
+        )
+        d[d["bedrooms_count"] == "Studio"] = 0
+        d["bedrooms_count"] = d["bedrooms_count"].astype(int)
+        # filter documents by provided preferences
+        d = d[(d["city"].isin(info["city"])) &
+              (d["rate"] <= info["max_rate"]) &
+              (d["bedrooms_count"] >= info["bedrooms_count"]) &
+              (d["date_diff"] >= 0)]
+        if d.empty:
+            return query, None
+
+        info_weights = {"cos": .5, "rate": .3, "date": .2}
+        norm = sum(info_weights.values())
+        for weight in info_weights:
+            info_weights[weight] /= norm
+        doc_eval = pd.DataFrame(columns=["rate", "date", "cosine"])
+        doc_eval["rate"] = d["rate"] / info["max_rate"] * info_weights["rate"]  # goodness of the rate
+        longest_time_period = (self.most_recent - info["date_of_listing"]).total_seconds()
+        doc_eval["date"] = d["date"].apply(
+            lambda x: abs((x - self.most_recent).total_seconds()) / longest_time_period * info_weights["date"]
+        )
+        _, sims = self._compute_cosine(query, {doc.name: doc for _, doc in d.iterrows()})
+        doc_eval["cosine"] = sims[[doc.name for _, doc in d.iterrows()], :] * info_weights["cos"]
+        doc_eval = doc_eval.sum(axis=1)
+        # heap always returns minimum, but we want max score -> negate numbers
+        heap_list = [(-score, doc_nr) for doc_nr, score in doc_eval.iteritems()]
+        heapq.heapify(heap_list)
+        top_k_docs = []
+        for i in range(top_k):
+            try:
+                sim, docnr = heapq.heappop(heap_list)
+                doc = rel_docs[docnr]
+                doc["score"] = -sim
+                top_k_docs.append(doc)
+            except IndexError:
+                break  # no more elements in the heap
+        return query, top_k_docs
 
     def search_cosine(self):
         print("Please enter search query: ", end=" ")
@@ -329,25 +406,57 @@ class SearchEngine:
         print("Search finished."), sys.stdout.flush()
         if top_k_docs is not None:
             rel_cols = ["title", "description", "city", "url", "score"]
-            docs = {rank+1: doc[rel_cols] for (rank, doc) in enumerate(top_k_docs)}
+            docs = {doc.index[0]: doc.loc[doc.index[0], rel_cols] for doc in top_k_docs}
             self._print_search_res(query, docs)
         else:
             print("No announcement matched the search.")
-        return
+            docs = None
+        return docs
 
     def search_conjunctive(self):
         print("Please enter search query: ", end=" ")
-        query = "cosy bedroom"
+        query = input()
         print('searching...')
-        _, all_rel_docs = self._process_query_conjunctive(query)
+        _, all_rel_docs = self._process_query_rel_docs(query, conjunctive=True)
         print("Search finished."), sys.stdout.flush()
         if all_rel_docs is not None:
-            rel_cols = ["title", "description", "city", "url"]
+            rel_cols = ["doc_nr", "title", "description", "city", "url"]
             docs = {key: doc.loc[0, rel_cols] for (key, doc) in all_rel_docs.items()}
             self._print_search_res(query, docs, has_score=False)
         else:
             print("No announcement matched the search.")
-        return
+            docs = None
+        return docs
+
+    def search_happy_score(self):
+        null_val = None
+        print("Please enter search query: ", end=" ")
+        query = "garden" # input()
+        information = dict()
+        print("Optionally you may provide the following information in the order named (Separated by return key):\n")
+        print("Cities (space separated):", end=" ")
+        c = "Houston" #input()
+        information["city"] = c.split(" ") if c is not "" else null_val
+        print("Maximum rate per night:", end=" ")
+        r = 50 #input()
+        information["max_rate"] = float(r) if r is not "" else null_val
+        print("Minimum number of bedrooms:", end=" ")
+        b = 1 #input()
+        information["bedrooms_count"] = int(b) if b is not "" else null_val
+        print("Date of listing after (MM/YY): ", end=" ")
+        d = "01/13" #input()
+        information["date_of_listing"] = datetime.strptime(d, "%m/%y") if d is not "" else null_val
+
+        print('Search initialized...')
+        _, top_k_docs = self._process_query_happy_score(query, information)
+        print("Search finished."), sys.stdout.flush()
+        if top_k_docs is not None:
+            rel_cols = ["title", "description", "city", "url", "score"]
+            docs = {doc.index[0]: doc.loc[doc.index[0], rel_cols] for doc in top_k_docs}
+            self._print_search_res(query, docs, has_score=True)
+        else:
+            print("No announcement matched the search.")
+        return top_k_docs
 
     @staticmethod
     def _print_search_res(query, docs, has_score=True):
@@ -356,12 +465,11 @@ class SearchEngine:
 
         # calculate the column widths for all entry, given the percentages
         # and terminal size (if terminal is too small, this will break maybe)
-        wd = {"t": .2, "d": .3, "c": .15, "u": .25}
+        wd = {"r": .07, "t": .2, "d": .3, "c": .15, "u": .25}
 
         if has_score:
             for col in wd:
                 wd[col] -= .01
-            wd["r"] = 7/100
             wd["s"] = 1 - sum(wd.values())
 
         for col in wd:
@@ -370,21 +478,20 @@ class SearchEngine:
         if has_score:
             print_widths = [wd[k] for k in ("r", "t", "d", "c", "u", "s")]
         else:
-            print_widths = [wd[k] for k in ("t", "d", "c", "u")]
+            print_widths = [wd[k] for k in ("r", "t", "d", "c", "u")]
 
         print(f"\nSearch query: {query if len(query) <= 100 else query[0:100] + '...'}")
-        search_res_msg = f"Seach results:\n\n"
-        search_res_middle = f"{'Title'.center(wd['t'], ' ')}|" \
-                            f"{'Description'.center(wd['d'], ' ')}|"\
-                            f"{'City'.center(wd['c'], ' ')}|" \
-                            f"{'Url'.center(wd['u'], ' ')}"
+        search_res_msg = f"Seach results:\n\n" \
+                         f"{'Doc-Nr'.center(wd['r'], ' ')}|" \
+                         f"{'Title'.center(wd['t'], ' ')}|" \
+                         f"{'Description'.center(wd['d'], ' ')}|"\
+                         f"{'City'.center(wd['c'], ' ')}|" \
+                         f"{'Url'.center(wd['u'], ' ')}"
         if has_score:
-            search_res_msg += f"{'Rank'.center(wd['r'], ' ')}|" + search_res_middle
             search_res_msg += f"|{'Score'.center(wd['s'], ' ')}"
-            ResArray = namedtuple("ResArray", "rank title desc city url score")
+            ResArray = namedtuple("ResArray", "docnr title desc city url score")
         else:
-            search_res_msg += search_res_middle
-            ResArray = namedtuple("ResArray", "title desc city url")
+            ResArray = namedtuple("ResArray", "docnr title desc city url")
         print(search_res_msg)
 
         def fit(string, s_list, max_width):
@@ -401,7 +508,7 @@ class SearchEngine:
             return string
 
         max_nr_rows_per_res = 5
-        for rank, doc in docs.items():
+        for docnr, doc in docs.items():
             # ad separation lines
             print(*(["="] * t_size), sep="", end="")
             if has_score:
@@ -418,16 +525,14 @@ class SearchEngine:
                 except IndexError:  # index error, url already covered by prev row
                     u = ""
 
-                if has_score:
-                    if r == 0:
-                        s = str(round(score, 3))
-                        rank = str(rank)
-                    else:
-                        rank, s = "", ""
-
-                    print_res.append(ResArray(rank, t, d, c, u, s))
+                if r == 0:
+                    s = str(round(float(score), 3)) if has_score else ""
+                    docnr = str(docnr)
                 else:
-                    print_res.append(ResArray(t, d, c, u))
+                    docnr, s = "", ""
+
+                arr = (docnr, t, d, c, u, s) if has_score else (docnr, t, d, c, u)
+                print_res.append(ResArray(*arr))
 
             if len(title) > 0:  # title wasnt fully covered
                 var = list(print_res[-1].title)  # string of title to list of chars
@@ -446,10 +551,10 @@ class SearchEngine:
                 var[-3:] = "..."  # last three chars of title
                 u = "".join(var)
             # reassign last row
-            print_res[-1] = ResArray(rank, t, d, c, u, print_res[-1].score) if has_score \
-                       else ResArray(t, d, c, u)
+            print_res[-1] = ResArray(docnr, t, d, c, u, print_res[-1].score) if has_score \
+                       else ResArray(docnr, t, d, c, u)
             for row in print_res:
-                print(*map(lambda s, l: s.center(l, " "), row, print_widths), sep="|")
+                print(*map(lambda string, l: string.center(l, " "), row, print_widths), sep="|")
 
         print(*(["="] * t_size), sep="")
         return
@@ -457,8 +562,10 @@ class SearchEngine:
 
 if __name__ == '__main__':
     se = SearchEngine(build_essentials=True)
-    se.search_conjunctive()
-    se.search_cosine()
+    #se._split_data_in_ads()
+    se.search_happy_score()
+    #se.search_conjunctive()
+    #se.search_cosine()
 
 
 
