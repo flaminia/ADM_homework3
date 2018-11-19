@@ -371,12 +371,13 @@ class SearchEngine:
         if d.empty:
             return query, None
 
+        # create new score out of the interesting documents
         info_weights = {"cos": .5, "rate": .3, "date": .2}
         norm = sum(info_weights.values())
         for weight in info_weights:
             info_weights[weight] /= norm
         doc_eval = pd.DataFrame(columns=["rate", "date", "cosine"])
-        doc_eval["rate"] = d["rate"] / info["max_rate"] * info_weights["rate"]  # goodness of the rate
+        doc_eval["rate"] = (1 - d["rate"] / info["max_rate"]) * info_weights["rate"]  # goodness of the rate
         longest_time_period = (self.most_recent - info["date_of_listing"]).total_seconds()
         doc_eval["date"] = d["date"].apply(
             lambda x: abs((x - self.most_recent).total_seconds()) / longest_time_period * info_weights["date"]
