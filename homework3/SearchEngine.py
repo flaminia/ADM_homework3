@@ -15,7 +15,10 @@ from scipy import sparse
 from shutil import get_terminal_size
 import sys
 from datetime import datetime
-
+from geopy.geocoders import Nominatim
+from geopy.extra import rate_limiter
+from geopy import distance
+import socket
 
 
 def timeit(method):
@@ -26,6 +29,21 @@ def timeit(method):
         print('%r  %2.2f s' % (method.__name__, (te - ts)))
         return result
     return timed
+
+
+def internet(host="8.8.8.8", port=53, timeout=3):
+    """
+    Host: 8.8.8.8 (google-public-dns-a.google.com)
+    OpenPort: 53/tcp
+    Service: domain (DNS/TCP)
+    """
+    try:
+        socket.setdefaulttimeout(timeout)
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
+        return True
+    except Exception as ex:
+        print(ex.message)
+        return False
 
 
 class SearchEngine:
@@ -45,7 +63,7 @@ class SearchEngine:
         self.nltk_check_downloaded()
 
         # compute statistics of the data set
-        # (if the dataset became much larger this would need to be a continuously
+        # (if the dataset was much larger this would need to be a continuously
         # updated data file to read from, and periodically update)
         docs = self._load_data_complete(as_dict=False)
         self.nr_docs = docs.shape[0]
@@ -348,12 +366,12 @@ class SearchEngine:
 
     def _process_query_happy_score(self, query, info, top_k=10):
 
-        # get the top k cosine scored documents
+        # get all documents, that have at least one word in common with search
         _, rel_docs = self._process_query_rel_docs(query, conjunctive=False)
-        nr_docs = len(rel_docs)
 
+        # convert dict to DataFrame for easier handling
         d = pd.concat((doc for docnr, doc in rel_docs.items()))
-        d["cos_rank"] = range(1, nr_docs + 1)
+        # prepare frame for calculations
         d["rate"] = d["average_rate_per_night"].apply(lambda x: float(x[1:]))
         d["date"] = d["date_of_listing"].apply(
             lambda x: datetime.strptime(x, "%B %Y")
@@ -361,30 +379,75 @@ class SearchEngine:
         d["date_diff"] = d["date"].apply(
             lambda x: (x - info["date_of_listing"]).total_seconds()
         )
-        d[d["bedrooms_count"] == "Studio"] = 0
+        d.loc[d["bedrooms_count"] == "Studio", "bedrooms_count"] = 0
         d["bedrooms_count"] = d["bedrooms_count"].astype(int)
-        # filter documents by provided preferences
-        d = d[(d["city"].isin(info["city"])) &
-              (d["rate"] <= info["max_rate"]) &
-              (d["bedrooms_count"] >= info["bedrooms_count"]) &
+
+        # filter documents by provided preferences first.
+        cities = info["city"]
+        max_rate = info["max_rate"]
+        bed_count = info["bedrooms_count"]
+        date_listing = info["date_of_listing"]
+        d = d[(d["city"].isin(cities)) &
+              (d["rate"] <= max_rate) &
+              (d["bedrooms_count"] >= bed_count) &
               (d["date_diff"] >= 0)]
         if d.empty:
             return query, None
 
         # create new score out of the interesting documents
-        info_weights = {"cos": .5, "rate": .3, "date": .2}
+        info_weights = {"cosine": .1, "distance": 0.4, "rate": .3, "date": .2}
+        doc_eval = pd.DataFrame(0, columns=info_weights.keys(), index=d.index)
+
+        online = internet()  # check if internet connection exists
+        if online:
+            geo_locator = Nominatim(user_agent="loc")
+            # Nominatim allows only 1 request per second, no heavy uses
+            geocode = rate_limiter.RateLimiter(geo_locator.geocode, min_delay_seconds=1)
+            city_coords = dict()
+            for city in cities:
+                loc = geocode(city + ", Texas, USA")
+                city_coords[city] = (loc.latitude, loc.longitude)
+
+            # distance calculation for the city names, only works with internet connection
+            def dist(x):
+                city = x["city"]
+                long, lat = x["longitude"], x["latitude"]
+                dis = distance.distance(city_coords[city], (lat, long)).miles * 1.60934  # conv to km
+                return dis
+
+            d["distance"] = d.loc[:, ["city", "longitude", "latitude"]].apply(dist, axis=1)
+            max_dist = 10  # kilometres, eval docs on this scale
+            doc_eval["distance"] = 1 - d["distance"].apply(lambda x: min(x / max_dist, 1))
+
+        else:  # no internet, let go of the distance weighting
+            info_weights["distance"] = 0  # for renormalization
+            doc_eval["distance"] = 0
+
+        # normalize the weights
         norm = sum(info_weights.values())
         for weight in info_weights:
             info_weights[weight] /= norm
-        doc_eval = pd.DataFrame(columns=["rate", "date", "cosine"])
-        doc_eval["rate"] = (1 - d["rate"] / info["max_rate"]) * info_weights["rate"]  # goodness of the rate
-        longest_time_period = (self.most_recent - info["date_of_listing"]).total_seconds()
+
+        # goodness of the rate
+        doc_eval["rate"] = (1 - d["rate"] / max_rate)
+        longest_time_period = (self.most_recent - date_listing).total_seconds()
+
+        # goodness of the date
         doc_eval["date"] = d["date"].apply(
-            lambda x: abs((x - self.most_recent).total_seconds()) / longest_time_period * info_weights["date"]
+            lambda x: abs((x - self.most_recent).total_seconds()) / longest_time_period
         )
+
         _, sims = self._compute_cosine(query, {doc.name: doc for _, doc in d.iterrows()})
-        doc_eval["cosine"] = sims[[doc.name for _, doc in d.iterrows()], :] * info_weights["cos"]
+        # goodness of the cosine similarity
+        doc_eval["cosine"] = sims[[doc.name for _, doc in d.iterrows()], :]
+
+        # weight all the columns
+        for name, weight in info_weights.items():
+            doc_eval[name] = doc_eval[name] * weight
+
+        # sum up all the different categories for an overall score, drop rest
         doc_eval = doc_eval.sum(axis=1)
+
         # heap always returns minimum, but we want max score -> negate numbers
         heap_list = [(-score, doc_nr) for doc_nr, score in doc_eval.iteritems()]
         heapq.heapify(heap_list)
@@ -397,6 +460,7 @@ class SearchEngine:
                 top_k_docs.append(doc)
             except IndexError:
                 break  # no more elements in the heap
+
         return query, top_k_docs
 
     def search_cosine(self):
@@ -432,11 +496,11 @@ class SearchEngine:
     def search_happy_score(self):
         null_val = None
         print("Please enter search query: ", end=" ")
-        query = "garden" # input()
+        query = "bedroom" # input()
         information = dict()
         print("Optionally you may provide the following information in the order named (Separated by return key):\n")
         print("Cities (space separated):", end=" ")
-        c = "Houston" #input()
+        c = "Houston San Antonio" #input()
         information["city"] = c.split(" ") if c is not "" else null_val
         print("Maximum rate per night:", end=" ")
         r = 50 #input()
