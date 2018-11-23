@@ -19,6 +19,7 @@ from geopy.geocoders import Nominatim
 from geopy.extra import rate_limiter
 from geopy import distance
 import socket
+import folium
 
 
 def timeit(method):
@@ -500,16 +501,16 @@ class SearchEngine:
         information = dict()
         print("Optionally you may provide the following information in the order named (Separated by return key):\n")
         print("Cities (space separated):", end=" ")
-        c = "Houston San Antonio" #input()
+        c = input()
         information["city"] = c.split(" ") if c is not "" else null_val
         print("Maximum rate per night:", end=" ")
-        r = 50 #input()
+        r = input()
         information["max_rate"] = float(r) if r is not "" else null_val
         print("Minimum number of bedrooms:", end=" ")
-        b = 1 #input()
+        b = input()
         information["bedrooms_count"] = int(b) if b is not "" else null_val
         print("Date of listing after (MM/YY): ", end=" ")
-        d = "01/13" #input()
+        d = input()
         information["date_of_listing"] = datetime.strptime(d, "%m/%y") if d is not "" else null_val
 
         print('Search initialized...')
@@ -624,11 +625,64 @@ class SearchEngine:
         print(*(["="] * t_size), sep="")
         return
 
+    def create_map(self, lat=29.95468008778, long=-95.176070286, radius=15):
+        docs = self._load_data_complete(as_dict=False)
+
+        print("Choose coordinates (reverting to default if empty string given):")
+        print("Latitude:", end=" ")
+        lat_ = input()
+        print("Longitude:", end=" ")
+        long_ = input()
+        print("Choose radius:", end=" ")
+        r = input()
+
+        lat = float(lat_) if lat_ != "" else lat
+        long = float(long_) if long_ != "" else long
+        radius = float(r) if r != "" else radius
+
+        # calculate distance for pd.Series object and chosen location with geopy
+        def dist_calc(x):
+            la = x["latitude"]
+            lo = x["longitude"]
+            return distance.distance((lat, long), (la, lo)).miles * 1.60934  # dist in km
+
+        docs["distance"] = docs.loc[:, ["latitude", "longitude"]].apply(dist_calc, axis=1)
+        # choose only documents within selected radius
+        docs = docs[docs["distance"] <= radius]
+
+        m = folium.Map(location=[lat, long])
+
+        for nr, doc in docs.iterrows():
+            # a marker for each document remaining
+            folium.Marker(
+                location=(doc["latitude"], doc["longitude"]),
+                popup=doc['title']
+            ).add_to(m)
+
+        # green cloud marker for center of location
+        folium.Marker(
+            location=(lat, long),
+            popup="Center",
+            icon=folium.Icon(icon='cloud', color="green")
+        ).add_to(m)
+        # circle around the center of location
+        folium.Circle(
+            radius=radius*1000,
+            location=[lat, long],
+            color='white',
+            fill=True,
+            fill_opacity=0.2,
+            fill_color="blue"
+        ).add_to(m)
+
+        # Save it as html
+        m.save('houses_within_radius.html')
 
 if __name__ == '__main__':
-    se = SearchEngine(build_essentials=True)
+    se = SearchEngine(build_essentials=False)
+    se.create_map()
     #se._split_data_in_ads()
-    se.search_happy_score()
+    #se.search_happy_score()
     #se.search_conjunctive()
     #se.search_cosine()
 
