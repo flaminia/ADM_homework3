@@ -48,6 +48,27 @@ def internet(host="8.8.8.8", port=53, timeout=3):
 
 
 class SearchEngine:
+    """
+    Search engine class for the dataset of AirBnB. It computes the vocabulary, the
+    IDF and the inverted index for a given collection of documents. The engine
+    processes the documents with NLTK tools: stemmer, tokenizer, stopwords removal.
+    Afterwards, the processed fields are lists of stemmed words.
+
+    There are three search methods available:
+    1) search_conjunctive searching for all documents containing all/any words of
+    the given query
+    2) search_cosine computing the cosine similarity among all documents that contain
+    all the words from the query
+    3) search_happy_score searching for documents containing any word of the query and
+    computing a weighted score of distance to center, recentness of the date listing,
+    rate of the accomodation, and cosine similarity.
+
+    All three functions print the results to the terminal.
+
+    Before usage, one needs to compute the aforementioned essential data structures,
+    otherwise the class will fail during search (no explicit error throw).
+    """
+
     def __init__(self, build_essentials=True, data_dir="./data/"):
 
         self.data_dir = data_dir
@@ -76,11 +97,20 @@ class SearchEngine:
 
         if build_essentials:
             docs_text_parts = docs["title"] + " " + docs["description"]
-            self.build_invert_idx(docs_text_parts)
+            self._build_invert_idx(docs_text_parts)
         self.built = build_essentials
+        return
 
-    @timeit
     def _create_vocab(self, docs=None):
+        """
+        Creates the vocabulary from documents or reads the vocabulry from file.
+        The name is always "vocabulary.csv" containing the word as index and its
+        term id as column entry. If it didn't already exist, the method will write
+        the file after computation
+        :param docs: dict or pd.DataFrame, the collection of documents (only essential parts)
+        :return: None
+        """
+
         fname = f"{self.data_dir}vocabulary.csv"
         if not isfile(fname):
             docs = self._process_docs(docs)
@@ -93,8 +123,16 @@ class SearchEngine:
         else:
             self.vocab = pd.read_csv(fname, index_col=0, header=0,
                                      keep_default_na=False, na_values=[""])
+        return
 
     def _load_data_by_nr(self, doc_nrs):
+        """
+        Load documents by the number of the respective documents. This assumes the
+        documents were already split into seperate .tsv files already.
+        :param doc_nrs: iterable, contains the integers of the docs
+        :return: dict, the documents in a (doc_nr, doc) key-value dictionary format
+        """
+
         docs = dict()
         for doc_nr in doc_nrs:
             docs[doc_nr] = pd.read_csv(f"{self.data_dir + self.proc_folder}doc_{doc_nr}.tsv",
@@ -102,6 +140,14 @@ class SearchEngine:
         return docs
 
     def _load_data_complete(self, as_dict=True):
+        """
+        Loads the airbnb dataset completely. Finds duplicates among the title, description,
+        and city and chooses one as representative (the first found). Returns the docs as
+        dict or DataFrame.
+        :param as_dict: bool, if True returns (doc_nr, doc) dictionary, if False, pd.DataFrame
+        :return: dict/DataFrame, the documents
+        """
+
         docs = pd.read_csv(f"{self.data_dir}Airbnb_Texas_Rentals.csv", header=0, sep=",")
         docs.drop(columns="Unnamed: 0", inplace=True)
         docs = docs.dropna().drop_duplicates(subset=["title", "description", "city"])
@@ -113,7 +159,12 @@ class SearchEngine:
             docs = ds
         return docs
 
-    def _split_data_in_ads(self):
+    def split_data_in_ads(self):
+        """
+        Splits the airbnb dataset into individual document .tsv files with document nr
+        included in the filename.
+        """
+
         docs = self._load_data_complete(as_dict=False)
         for i, row in docs.iterrows():
             row_to_frame = row.to_frame().T
@@ -121,9 +172,14 @@ class SearchEngine:
                 f"{self.data_dir + self.proc_folder}doc_{i}.tsv",
                 sep="\t", index=None
             )
+        return
 
     @staticmethod
     def nltk_check_downloaded():
+        """
+        Check the prerequisite NLTK tools, download if not found
+        """
+
         try:
             nltk.data.find('corpora/stopwords')
         except LookupError:
@@ -138,8 +194,9 @@ class SearchEngine:
         Remove special characters and superfluous whitespaces from text body. Also
         send text to lower case, tokenize and stem the terms.
         :param text: str, the text to process.
-        :return: generator, yields the processed word in iteration
+        :return: generator, yields the processed words in iteration
         """
+
         text = self.doc_to_string(text).lower()
         sub_re = r"[^A-Za-z']"
         text = re.sub(sub_re, " ", text)
@@ -150,6 +207,13 @@ class SearchEngine:
                     yield(w)
 
     def _process_docs(self, docs=None):
+        """
+        Takes a collection of documents and processes them iteratively. The docs
+        can be a pd.DataFrame, pd.Series or dictionary.
+        :param docs: pd.DataFrame, pd.Series or dictionary
+        :return: dict, indexed by doc number and lists (processed doc) as values
+        """
+
         if docs is None:
             docs = self._load_data_complete(as_dict=False)
             docs = (docs["description"] + " " + docs["title"]).to_frame()
@@ -169,18 +233,21 @@ class SearchEngine:
         return d_out
 
     @timeit
-    def build_invert_idx(self, docs=None, read_fname="inverted_index.txt",
-                         write_fname="inverted_index.txt", load_from_file=False):
+    def _build_invert_idx(self, docs=None, read_fname="inverted_index.txt",
+                          write_fname="inverted_index.txt", load_from_file=False):
         """
         Build the inverted index for the terms in a collection of documents. Will load a
-        previously build inverted index from file if it detects the file existing.
-        :param docs: list, collection of documents of type list, tuple or ndarray
+        previously build inverted index from file if it detects the file existing (and
+        param load_from_file is True).
+        :param docs: pd.DataFrame/dict, collection of documents
         :param read_fname: str, filename of the inverted txt to load. Needs to be built in the
-                              specified way of the method
+                                specified way of the method
         :param write_fname: str, filename to write the inverted index to.
-        :return: dict, the inverted index with terms as keys and (doc_nr, relative_term_frequency)
+        :param load_from_file: bool, load the index from the filename provided if True
+        :return: dict, the inverted index with terms as keys and [TermSet(docID, tfidf),...]
                        as values.
         """
+
         if self.vocab is None:
             self._create_vocab(docs)
         file = f"{self.data_dir}{read_fname}"
@@ -221,14 +288,22 @@ class SearchEngine:
         self.idf = idf_dict
         return inv_index
 
-    @timeit
     def _build_idf(self, docs=None):
+        """
+        Builds the IDF values for terms in docs.
+        :param docs: dict/pd.DataFrame, the documents
+        :return: tuple; a tuple of (docs_dict, idf_dict, termFrequencies_dict, docCounters_dict).
+        The idf_dict contains the IDF value for each term in the documents.
+        The termFrequencies_dict contains the global number of occurences of each term in all the docs.
+        the docCounters_dict contains the local number of occurences of each term in the respective doc.
+        """
+
         docs = self._process_docs(docs)
         nr_docs = len(docs)
         idf = defaultdict(lambda: np.math.log(len(docs) + 1))
         # dict to track nr of occurences of each term
         term_freqs = defaultdict(int)
-        # dict to store counter of words in docs
+        # dict to store counter of words in each doc
         doc_counters = dict()
         for docnr, doc in docs.items():
             freqs = Counter(doc)
@@ -246,10 +321,11 @@ class SearchEngine:
     @staticmethod
     def doc_to_string(doc):
         """
-        Converts a document to a string. Can take a list, ndarray, tuple to convert to str
+        Converts a document to a string. Can take a list, DataFrame, tuple to convert to str
         :param doc: iterable, container of the document
         :return: str, the to string converted document.
         """
+
         if isinstance(doc, str):
             return doc
         elif isinstance(doc, np.ndarray):
@@ -265,7 +341,7 @@ class SearchEngine:
     def tfidf_query(self, query):
         """
         TF-IDF weigh a given query vector
-        :param query: ndarray, list or similar; query terms in vector for (terms are strings)
+        :param query: ndarray, list or similar; query terms in vector (terms are strings)
         :return: dict, dictionary with term and weights associated to it
         """
 
@@ -281,6 +357,13 @@ class SearchEngine:
 
     @timeit
     def _process_query_rel_docs(self, query, conjunctive=True):
+        """
+        Given a query find all relevant documents that either contain all the words (conjunctive)
+        or any of the words (non conjunctive).
+        :param query: str, the query unprocessed
+        :param conjunctive: bool
+        :return: tuple(str, dict); the initial query, and the relevant docs indexed by doc number.
+        """
         query_proc = list(self._process_text(query))
         if conjunctive:
             cand_update = lambda set1, set2: set1.intersection(set2)
@@ -315,6 +398,15 @@ class SearchEngine:
 
     @timeit
     def _process_query_cosinesim(self, query, top_k=10, conjunctive=True):
+        """
+        Control method for computing the cosine of relevant documents to the query. Returns
+        the top k documents in a list as returned by the heap in succession.
+        :param query: str, the raw query string
+        :param top_k: int, the number of top documents to be returned (in order)
+        :param conjunctive: bool, conjunctive relevant docs or not
+        :return: tuple(str, list); the initial query, and the list of top documents
+        """
+
         _, rel_docs = self._process_query_rel_docs(query, conjunctive)
         if rel_docs is not None:
             _, similarities = self._compute_cosine(query, rel_docs)
@@ -326,7 +418,7 @@ class SearchEngine:
                 try:
                     sim, docnr = heapq.heappop(top_heap)
                     doc = rel_docs[docnr]
-                    docnr["score"] = -sim
+                    doc["score"] = -sim
                     top_k_docs.append(doc)
                 except IndexError:
                     break  # no more elements in the heap
@@ -335,23 +427,44 @@ class SearchEngine:
             return query, None
 
     def _compute_cosine(self, query, docs):
+        """
+        Computes the similarity of a set of documents to a string. For this a sparse matrix
+        is computed for all the documents possible, with information filled in only for the
+        relevant documents (docs).
+        :param query: str, the raw query
+        :param docs: dict, the documents indexed by doc number and doc as value
+        :return: tuple(str, np.ndarray); the query, and the similarities of all the documents
+        to the query. The array is row indexed by the document number.
+        """
+
         query_proc = list(self._process_text(query))
         query_dic = self.tfidf_query(query_proc)
-        col = []
-        row = []
-        data = []
+
+        # scipy sparse matrices can be filled by a combination of three list parameters:
+        # cols, rows, data for which holds:
+        #
+        # for all i in I: sparse_m[rows[i], cols[i]] = data[i]
+        #
+        # Thus the lists contain an index-data pair when taking the same index slice.
+        # In the following, the one-hot-encoding of the relevant documents is computed
+        # and its tfidf values stored in sparse matrix.
+        col = []  # list of non zero column indices
+        row = []  # list of non zero row indices
+        data = []  # data of the non zero indices
         for d_nr, content in docs.items():
             content = set(self._process_text(content["title"] + " " + content["description"]))
             for term in content:
                 col.append(self.vocab.loc[term, "term_id"])
                 row.append(d_nr)
+                # find the tfidf (the data) of the term in this document
                 for termset in self.inv_index[term]:
                     if termset.docID == d_nr:
                         data.append(termset.tfidf)
-                        break
+                        break  # value found, no other termset needs to be found after
         shape = self.nr_docs, len(self.vocab)
         docs_repr = sparse.csr_matrix((data, (row, col)), shape=shape, dtype=float)
 
+        # repeat the same procedure for the query.
         col = []
         row = []
         data = []
@@ -362,11 +475,29 @@ class SearchEngine:
         shape = 1, len(self.vocab)
         query_rep = sparse.csr_matrix((data, (row, col)), shape=shape, dtype=float)
 
+        # scikit's cosine_similarity can take sparse matrices and handle them accordingly fast.
         similarities = cosine_similarity(docs_repr, query_rep)
         return query, similarities
 
+    @timeit
     def _process_query_happy_score(self, query, info, top_k=10):
+        """
+        Computes the custom score. It is a weighted score of non conjunctively selected
+        documents, pre filtered by additional information from 'info' and then also
+        scored and weighted with the same. Relevant information is:
 
+        Rate per night
+        Date of listing
+        Minimum number of bedrooms
+        Cities to search in
+
+        For these pieces of information the score is computed together with a cosine similarity
+        of the query.
+        :param query: str, the raw query
+        :param info: dict, the categories as keys and weights as values
+        :param top_k: int, the number of top rated documents to return
+        :return: tuple(str, list); the query, and the list of top documents (in order).
+        """
         # get all documents, that have at least one word in common with search
         _, rel_docs = self._process_query_rel_docs(query, conjunctive=False)
 
@@ -377,17 +508,20 @@ class SearchEngine:
         d["date"] = d["date_of_listing"].apply(
             lambda x: datetime.strptime(x, "%B %Y")
         )
-        d["date_diff"] = d["date"].apply(
-            lambda x: (x - info["date_of_listing"]).total_seconds()
-        )
+
         d.loc[d["bedrooms_count"] == "Studio", "bedrooms_count"] = 0
         d["bedrooms_count"] = d["bedrooms_count"].astype(int)
 
         # filter documents by provided preferences first.
-        cities = info["city"]
-        max_rate = info["max_rate"]
-        bed_count = info["bedrooms_count"]
-        date_listing = info["date_of_listing"]
+        cities = info["city"] if info["city"] is not None else self.available_cities
+        max_rate = info["max_rate"] if info["max_rate"] is not None else float("inf")
+        bed_count = info["bedrooms_count"] if info["bedrooms_count"] is not None else 0
+        date_listing = info["date_of_listing"] if info["date_of_listing"] is not None \
+            else datetime(2000, 1, 1)
+
+        d["date_diff"] = d["date"].apply(
+            lambda x: (x - date_listing).total_seconds()
+        )
         d = d[(d["city"].isin(cities)) &
               (d["rate"] <= max_rate) &
               (d["bedrooms_count"] >= bed_count) &
@@ -417,7 +551,7 @@ class SearchEngine:
                 return dis
 
             d["distance"] = d.loc[:, ["city", "longitude", "latitude"]].apply(dist, axis=1)
-            max_dist = 10  # kilometres, eval docs on this scale
+            max_dist = 10  # kilometres, eval docs on scale [0, 10] km
             doc_eval["distance"] = 1 - d["distance"].apply(lambda x: min(x / max_dist, 1))
 
         else:  # no internet, let go of the distance weighting
@@ -464,11 +598,17 @@ class SearchEngine:
 
         return query, top_k_docs
 
-    def search_cosine(self):
+    def search_cosine(self, top_k=10):
+        """
+        Cosine similarity search query.
+        :param top_k: int, the number of top rated documents to print and return
+        :return: dict, the top documents index by doc number. Docs contain score as data
+        """
+
         print("Please enter search query: ", end=" ")
         query = input()
         print('searching...')
-        _, top_k_docs = self._process_query_cosinesim(query, top_k=10)
+        _, top_k_docs = self._process_query_cosinesim(query, top_k=top_k)
         print("Search finished."), sys.stdout.flush()
         if top_k_docs is not None:
             rel_cols = ["title", "description", "city", "url", "score"]
@@ -480,26 +620,36 @@ class SearchEngine:
         return docs
 
     def search_conjunctive(self):
+        """
+        Conjuctive search query.
+        :return: dict, the documents index by doc number (no ordered hierarchy)
+        """
+
         print("Please enter search query: ", end=" ")
         query = input()
         print('searching...')
         _, all_rel_docs = self._process_query_rel_docs(query, conjunctive=True)
         print("Search finished."), sys.stdout.flush()
         if all_rel_docs is not None:
-            rel_cols = ["doc_nr", "title", "description", "city", "url"]
-            docs = {key: doc.loc[0, rel_cols] for (key, doc) in all_rel_docs.items()}
+            rel_cols = ["title", "description", "city", "url"]
+            docs = {docnr: doc.loc[docnr, rel_cols] for (docnr, doc) in all_rel_docs.items()}
             self._print_search_res(query, docs, has_score=False)
         else:
             print("No announcement matched the search.")
             docs = None
         return docs
 
-    def search_happy_score(self):
+    def search_happy_score(self, top_k=10):
+        """
+        The custom search query. Will aks for optional additional information.
+        :param top_k: int, number of top rated documents
+        :return: dict, the docs indexed by number. Documents contain their score as data.
+        """
         null_val = None
         print("Please enter search query: ", end=" ")
-        query = "bedroom" # input()
+        query = input()
         information = dict()
-        print("Optionally you may provide the following information in the order named (Separated by return key):\n")
+        print("Optionally you may provide the following information:\n")
         print("Cities (space separated):", end=" ")
         c = input()
         information["city"] = c.split(" ") if c is not "" else null_val
@@ -514,7 +664,7 @@ class SearchEngine:
         information["date_of_listing"] = datetime.strptime(d, "%m/%y") if d is not "" else null_val
 
         print('Search initialized...')
-        _, top_k_docs = self._process_query_happy_score(query, information)
+        _, top_k_docs = self._process_query_happy_score(query, information, top_k=top_k)
         print("Search finished."), sys.stdout.flush()
         if top_k_docs is not None:
             rel_cols = ["title", "description", "city", "url", "score"]
@@ -526,6 +676,15 @@ class SearchEngine:
 
     @staticmethod
     def _print_search_res(query, docs, has_score=True):
+        """
+        Print the search results in tabular form. If the data has a score (keyword needs
+        to be set to True), then an extra column for the score is printed and the space
+        for each column adapted to fit the new requirements.
+        :param query: str, the query string
+        :param docs: dict, the documents to print
+        :param has_score: bool, documents are ranked
+        """
+
         t_size = get_terminal_size().columns
         t_size_capped = t_size - 10
 
@@ -576,7 +735,7 @@ class SearchEngine:
         max_nr_rows_per_res = 5
         for docnr, doc in docs.items():
             # ad separation lines
-            print(*(["="] * t_size), sep="", end="")
+            print(*(["="] * t_size), sep="", end="\n")
             if has_score:
                 title, desc, city, url, score = doc
             else:
@@ -625,7 +784,17 @@ class SearchEngine:
         print(*(["="] * t_size), sep="")
         return
 
-    def create_map(self, lat=29.95468008778, long=-95.176070286, radius=15):
+    @timeit
+    def create_map(self, lat=29.95468008778, long=-95.176070286, radius=15.0):
+        """
+        Create a folium leaflet js map for selected latitude, longitude, and radius.
+        Will find the announcements in that area within the radius around the selected
+        center. It stores the map in an html file named 'houses_within_radius.html'.
+        :param lat: float, fallback default param of latitude
+        :param long: float, fallback default param of longitude
+        :param radius: float, fallback default param of radius length (in km)
+        """
+
         docs = self._load_data_complete(as_dict=False)
 
         print("Choose coordinates (reverting to default if empty string given):")
@@ -653,10 +822,14 @@ class SearchEngine:
         m = folium.Map(location=[lat, long])
 
         for nr, doc in docs.iterrows():
+            doc_print = doc[['average_rate_per_night', 'title', 'description']].to_frame().T.reset_index()
+            doc_print.columns = ["Doc-Nr", "Rate", "Title", "Description"]
+            html = doc_print.to_html(classes='table', index=False, justify="center")
+            popup = folium.Popup(html)
             # a marker for each document remaining
             folium.Marker(
                 location=(doc["latitude"], doc["longitude"]),
-                popup=doc['title']
+                popup=popup
             ).add_to(m)
 
         # green cloud marker for center of location
@@ -677,16 +850,3 @@ class SearchEngine:
 
         # Save it as html
         m.save('houses_within_radius.html')
-
-if __name__ == '__main__':
-    se = SearchEngine(build_essentials=False)
-    se.create_map()
-    #se._split_data_in_ads()
-    #se.search_happy_score()
-    #se.search_conjunctive()
-    #se.search_cosine()
-
-
-
-
-

@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>L_PREFER_CANVAS=false; L_NO_TOUCH=false; L_DISABLE_3D=false;</script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.3.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+    <meta name="viewport" content="width=device-width,
+        initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>#map_a4ab70c02f1d4252a9a6a0685d1bd9be {
+        position: relative;
+        width: 100.0%;
+        height: 100.0%;
+        left: 0.0%;
+        top: 0.0%;
+        }
+    </style>
+</head>
+<body>    
+    
+    <div class="folium-map" id="map_a4ab70c02f1d4252a9a6a0685d1bd9be" ></div>
+</body>
+<script>    
+    
+    
+        var bounds = null;
+    
+
+    var map_a4ab70c02f1d4252a9a6a0685d1bd9be = L.map(
+        'map_a4ab70c02f1d4252a9a6a0685d1bd9be', {
+        center: [29.95468008778, -95.176070286],
+        zoom: 10,
+        maxBounds: bounds,
+        layers: [],
+        worldCopyJump: false,
+        crs: L.CRS.EPSG3857,
+        zoomControl: true,
+        });
+
+    
+    
+    var tile_layer_3990f2192d954e8992853531799997b6 = L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+        "attribution": null,
+        "detectRetina": false,
+        "maxNativeZoom": 18,
+        "maxZoom": 18,
+        "minZoom": 0,
+        "noWrap": false,
+        "opacity": 1,
+        "subdomains": "abc",
+        "tms": false
+}).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+    
+        var marker_c4a88e9979f745a394d9b5c5cb93e4c3 = L.marker(
+            [29.954680087782503, -95.1760702862707],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_9556e34db30f4972a143e47176c7fca3 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_e1586844f7294d75aab1741e46416b61 = $(`<div id="html_e1586844f7294d75aab1741e46416b61" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>18</td>       <td>$1500</td>       <td>Super Bowl 2017 4 BDRM Home Retreat</td>       <td>4 bedroom 2 bathroom home with an open floor p...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_9556e34db30f4972a143e47176c7fca3.setContent(html_e1586844f7294d75aab1741e46416b61);
+            
+
+            marker_c4a88e9979f745a394d9b5c5cb93e4c3.bindPopup(popup_9556e34db30f4972a143e47176c7fca3)
+            ;
+
+            
+        
+    
+        var marker_b3453c6b3f754542bb5090a23be188f7 = L.marker(
+            [30.000942588551997, -95.25816793356572],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_5d3e14c490104af3afe7da9e1bf0cea7 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_8a033514f7954894a125b01f37c7b861 = $(`<div id="html_8a033514f7954894a125b01f37c7b861" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>54</td>       <td>$81</td>       <td>Entire home 5 Miles From IAH Blocks from Hwy 5...</td>       <td>Entire 3 bedroom/2 full bath home in a quiet n...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_5d3e14c490104af3afe7da9e1bf0cea7.setContent(html_8a033514f7954894a125b01f37c7b861);
+            
+
+            marker_b3453c6b3f754542bb5090a23be188f7.bindPopup(popup_5d3e14c490104af3afe7da9e1bf0cea7)
+            ;
+
+            
+        
+    
+        var marker_884aa4fabdba40299d975f23f88a3c0f = L.marker(
+            [29.9295383838455, -95.250962378514],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_17fa0331bd1b4ddf99d88a7cdb1b605d = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_e89f0e26c74d478fa7b0602966526d30 = $(`<div id="html_e89f0e26c74d478fa7b0602966526d30" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>90</td>       <td>$200</td>       <td>2 Story Home by Bush Int'l Airport</td>       <td>4 Bedrooms, 1 living room, 1 study room, 3 ful...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_17fa0331bd1b4ddf99d88a7cdb1b605d.setContent(html_e89f0e26c74d478fa7b0602966526d30);
+            
+
+            marker_884aa4fabdba40299d975f23f88a3c0f.bindPopup(popup_17fa0331bd1b4ddf99d88a7cdb1b605d)
+            ;
+
+            
+        
+    
+        var marker_1aeda0ee32034647aee111650c6d6128 = L.marker(
+            [29.9865691217172, -95.228183855981],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_85f0e26e6ab3449180fe274f9b8d1bcd = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_695674adf2694f0a85883547f249974b = $(`<div id="html_695674adf2694f0a85883547f249974b" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>130</td>       <td>$175</td>       <td>Single Story Golf Course Home. 15 minutes from...</td>       <td>3 Bedroom 2.5 Bathroom Custom Builder Home. Pr...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_85f0e26e6ab3449180fe274f9b8d1bcd.setContent(html_695674adf2694f0a85883547f249974b);
+            
+
+            marker_1aeda0ee32034647aee111650c6d6128.bindPopup(popup_85f0e26e6ab3449180fe274f9b8d1bcd)
+            ;
+
+            
+        
+    
+        var marker_f7c1b85da64047acab74d72e0f1feca2 = L.marker(
+            [29.9154605054204, -95.0992445076658],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_88b0c7595ab94823b713e7ec63710cd5 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_52f84c0396d14cab992676bbffd35654 = $(`<div id="html_52f84c0396d14cab992676bbffd35654" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>325</td>       <td>$51</td>       <td>GOLF &amp; cozyCORPORATE setting-15mi/IAH &amp; 21mi/HOU</td>       <td>Consider this laid back get away, your home aw...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_88b0c7595ab94823b713e7ec63710cd5.setContent(html_52f84c0396d14cab992676bbffd35654);
+            
+
+            marker_f7c1b85da64047acab74d72e0f1feca2.bindPopup(popup_88b0c7595ab94823b713e7ec63710cd5)
+            ;
+
+            
+        
+    
+        var marker_ba8de64f536842f79b76ed933567ea76 = L.marker(
+            [30.010904590798102, -95.15703020529791],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_3f437a5c26cb4ba3873ec5d8c6e15059 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_a5a17aed8879499c8de022aa39975baf = $(`<div id="html_a5a17aed8879499c8de022aa39975baf" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>397</td>       <td>$250</td>       <td>Fabulous Condo on Golf Course</td>       <td>Only 20 minutes from Bush Intercontinental Air...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_3f437a5c26cb4ba3873ec5d8c6e15059.setContent(html_a5a17aed8879499c8de022aa39975baf);
+            
+
+            marker_ba8de64f536842f79b76ed933567ea76.bindPopup(popup_3f437a5c26cb4ba3873ec5d8c6e15059)
+            ;
+
+            
+        
+    
+        var marker_cfec8077dfdc4281a81bd9ddd0524b01 = L.marker(
+            [29.9974817782272, -95.1472564328718],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_2c31ad98122c4acc866122b11e6a20f9 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_72e6734a35c54e1aafb6060eb57490e5 = $(`<div id="html_72e6734a35c54e1aafb6060eb57490e5" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>417</td>       <td>$160</td>       <td>Spacious Living Near Lake Houston</td>       <td>My house is in a Master-Planned community w/lo...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_2c31ad98122c4acc866122b11e6a20f9.setContent(html_72e6734a35c54e1aafb6060eb57490e5);
+            
+
+            marker_cfec8077dfdc4281a81bd9ddd0524b01.bindPopup(popup_2c31ad98122c4acc866122b11e6a20f9)
+            ;
+
+            
+        
+    
+        var marker_39153283b4ab4de6aed9e0cc29ef966b = L.marker(
+            [29.997270604197396, -95.14525940369492],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_e4c4363abb8f4d9994e126681ae5b25d = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_7d06eb9578b248a797c9a1d4ff795ce1 = $(`<div id="html_7d06eb9578b248a797c9a1d4ff795ce1" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>433</td>       <td>$89</td>       <td>湖边安静小区</td>       <td>湖边安静小区</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_e4c4363abb8f4d9994e126681ae5b25d.setContent(html_7d06eb9578b248a797c9a1d4ff795ce1);
+            
+
+            marker_39153283b4ab4de6aed9e0cc29ef966b.bindPopup(popup_e4c4363abb8f4d9994e126681ae5b25d)
+            ;
+
+            
+        
+    
+        var marker_03e75137a5f24bb1abad8a8fc36bf054 = L.marker(
+            [30.0366178770123, -95.1744311843334],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_7f1b501733514c8389c74482707f64df = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_43571afab6284bef9528249453be0dde = $(`<div id="html_43571afab6284bef9528249453be0dde" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>516</td>       <td>$99</td>       <td>Cozy 2BR+2PA+Spacious living room</td>       <td>My place is good for seniors, couples, busines...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_7f1b501733514c8389c74482707f64df.setContent(html_43571afab6284bef9528249453be0dde);
+            
+
+            marker_03e75137a5f24bb1abad8a8fc36bf054.bindPopup(popup_7f1b501733514c8389c74482707f64df)
+            ;
+
+            
+        
+    
+        var marker_869d2a6caa0043ed8a377edb43e47eca = L.marker(
+            [29.937983635869397, -95.21750399233879],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_606c29078f3646ae8d0dfcf21be65246 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_4c00569a377c4ea0853b788c6b71f92c = $(`<div id="html_4c00569a377c4ea0853b788c6b71f92c" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>991</td>       <td>$39</td>       <td>Cozy&amp;Comfort Private Rm. Near IAH</td>       <td>This home is essential for the person who need...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_606c29078f3646ae8d0dfcf21be65246.setContent(html_4c00569a377c4ea0853b788c6b71f92c);
+            
+
+            marker_869d2a6caa0043ed8a377edb43e47eca.bindPopup(popup_606c29078f3646ae8d0dfcf21be65246)
+            ;
+
+            
+        
+    
+        var marker_621218516d4440adb70117eacac69cf5 = L.marker(
+            [29.9203112608549, -95.1558531117148],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_89bbcbe27fc049c3b82a84b3af7129bc = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_9e7b19ae0f444b229a230c372168aac4 = $(`<div id="html_9e7b19ae0f444b229a230c372168aac4" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>1162</td>       <td>$400</td>       <td>4BR Lakehouse w/ Pvt. Pool &amp; Pier</td>       <td>Six-acre lakeside getaway in Space City. Enjoy...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_89bbcbe27fc049c3b82a84b3af7129bc.setContent(html_9e7b19ae0f444b229a230c372168aac4);
+            
+
+            marker_621218516d4440adb70117eacac69cf5.bindPopup(popup_89bbcbe27fc049c3b82a84b3af7129bc)
+            ;
+
+            
+        
+    
+        var marker_fd474f5b3cf34d899ad9dfcfa1fff0f8 = L.marker(
+            [29.9550861944799, -95.173046807334],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_c48a52b86ac645479dc021bc66bf8136 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_93e084c0e1ea4904a7cce502df790c73 = $(`<div id="html_93e084c0e1ea4904a7cce502df790c73" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>1234</td>       <td>$40</td>       <td>Private room near IAH &amp; Downtown</td>       <td>One bedroom (queen size bed) with walk in clos...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_c48a52b86ac645479dc021bc66bf8136.setContent(html_93e084c0e1ea4904a7cce502df790c73);
+            
+
+            marker_fd474f5b3cf34d899ad9dfcfa1fff0f8.bindPopup(popup_c48a52b86ac645479dc021bc66bf8136)
+            ;
+
+            
+        
+    
+        var marker_c172c032548b49a19dd2164b48e1c877 = L.marker(
+            [29.9844360525734, -95.19598508492778],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_15d0ba0c1cba4328b48fdb5b95ab0bc6 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_81f40338751e43acbf99debf20c80884 = $(`<div id="html_81f40338751e43acbf99debf20c80884" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>1349</td>       <td>$24</td>       <td>5 Star Quality Private RM &amp; Bath Near IAH Airport</td>       <td>You’ll love my place because of the neighborho...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_15d0ba0c1cba4328b48fdb5b95ab0bc6.setContent(html_81f40338751e43acbf99debf20c80884);
+            
+
+            marker_c172c032548b49a19dd2164b48e1c877.bindPopup(popup_15d0ba0c1cba4328b48fdb5b95ab0bc6)
+            ;
+
+            
+        
+    
+        var marker_041a39ae9f9b431abe793467f222845a = L.marker(
+            [29.982109543938602, -95.1542791133798],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_750138d5e7464a988b450a7d1cb453da = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_7a22e6955b3c4b3b97fcfc996c3f4ff2 = $(`<div id="html_7a22e6955b3c4b3b97fcfc996c3f4ff2" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>1433</td>       <td>$1000</td>       <td>Super Bowl weekend!</td>       <td>My place is close to Lifetime fitness lake hou...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_750138d5e7464a988b450a7d1cb453da.setContent(html_7a22e6955b3c4b3b97fcfc996c3f4ff2);
+            
+
+            marker_041a39ae9f9b431abe793467f222845a.bindPopup(popup_750138d5e7464a988b450a7d1cb453da)
+            ;
+
+            
+        
+    
+        var marker_4de46ae1281c41adb7d61579cb9549a0 = L.marker(
+            [29.9378413656248, -95.2421928409867],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_80fa785b4eb8431a8930f6c72f20b694 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_bf3cfec1ec8b4b5c8b10b06b0765f036 = $(`<div id="html_bf3cfec1ec8b4b5c8b10b06b0765f036" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>1465</td>       <td>$37</td>       <td>Private room near IAH airport. Gated community</td>       <td>One room with queen bed in gated community in ...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_80fa785b4eb8431a8930f6c72f20b694.setContent(html_bf3cfec1ec8b4b5c8b10b06b0765f036);
+            
+
+            marker_4de46ae1281c41adb7d61579cb9549a0.bindPopup(popup_80fa785b4eb8431a8930f6c72f20b694)
+            ;
+
+            
+        
+    
+        var marker_e24fdac39c6e470b861ba82c79f386cc = L.marker(
+            [29.989861297849004, -95.2471603482132],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_473ed55f0ee946108c494248a988ef6a = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_efe67f3de76a427281440fecba1278f0 = $(`<div id="html_efe67f3de76a427281440fecba1278f0" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>1520</td>       <td>$25</td>       <td>A Private Room &amp; Bath Mins From IAH</td>       <td>Welcome to Beautiful Houston Tx.\n\nThe room i...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_473ed55f0ee946108c494248a988ef6a.setContent(html_efe67f3de76a427281440fecba1278f0);
+            
+
+            marker_e24fdac39c6e470b861ba82c79f386cc.bindPopup(popup_473ed55f0ee946108c494248a988ef6a)
+            ;
+
+            
+        
+    
+        var marker_e6b9b50e12a14a9fa53be9f54a7eff04 = L.marker(
+            [29.976055293922602, -95.22145419909609],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_4034ea35043247f58c2724f06e9b5e0c = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_9f026cb1895347d3b5fa773b223771e8 = $(`<div id="html_9f026cb1895347d3b5fa773b223771e8" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>1541</td>       <td>$50</td>       <td>Whole 2nd floor to yourself-15 minutes from IAH</td>       <td>*15 mins away from the George Bush Intercontin...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_4034ea35043247f58c2724f06e9b5e0c.setContent(html_9f026cb1895347d3b5fa773b223771e8);
+            
+
+            marker_e6b9b50e12a14a9fa53be9f54a7eff04.bindPopup(popup_4034ea35043247f58c2724f06e9b5e0c)
+            ;
+
+            
+        
+    
+        var marker_906f3dbbed0044ad81dc01adba1b997a = L.marker(
+            [29.892014344298897, -95.2111312116185],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_94e1d7fdea4949a289202bd1be59e3c4 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_cf16e01258334b0fb9e123031760ad57 = $(`<div id="html_cf16e01258334b0fb9e123031760ad57" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>1655</td>       <td>$112</td>       <td>1 bed room travel trailer</td>       <td>Our luxury RV resorts offer a full array of am...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_94e1d7fdea4949a289202bd1be59e3c4.setContent(html_cf16e01258334b0fb9e123031760ad57);
+            
+
+            marker_906f3dbbed0044ad81dc01adba1b997a.bindPopup(popup_94e1d7fdea4949a289202bd1be59e3c4)
+            ;
+
+            
+        
+    
+        var marker_bc21bf88d46c4cbe8816718beb97db3e = L.marker(
+            [29.9253945876996, -95.1825184781524],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_46887cb8067346c8814499937ea6173a = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_4dd4bceffc514068b11e9e501635bcac = $(`<div id="html_4dd4bceffc514068b11e9e501635bcac" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>1667</td>       <td>$3000</td>       <td>3/2/2 close to Airport, Downtown and Lake Hous...</td>       <td>My place is close to the airport, parks, publi...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_46887cb8067346c8814499937ea6173a.setContent(html_4dd4bceffc514068b11e9e501635bcac);
+            
+
+            marker_bc21bf88d46c4cbe8816718beb97db3e.bindPopup(popup_46887cb8067346c8814499937ea6173a)
+            ;
+
+            
+        
+    
+        var marker_e4ba1c14d37a49c09021eecf1c01b5f0 = L.marker(
+            [29.9225644370777, -95.1611842254975],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_c3506f65e8fe4f0a8fb0c63b793ac1a2 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_41456c8c1d8847719522c6ee12e4cb88 = $(`<div id="html_41456c8c1d8847719522c6ee12e4cb88" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>1896</td>       <td>$64</td>       <td>New Luxurious Guest House on Lake close to IAH</td>       <td>Guest house is newly constructed and furnished...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_c3506f65e8fe4f0a8fb0c63b793ac1a2.setContent(html_41456c8c1d8847719522c6ee12e4cb88);
+            
+
+            marker_e4ba1c14d37a49c09021eecf1c01b5f0.bindPopup(popup_c3506f65e8fe4f0a8fb0c63b793ac1a2)
+            ;
+
+            
+        
+    
+        var marker_5bc7b79e7c7b4e0eaeccaaa020de6b9c = L.marker(
+            [29.9199018281148, -95.1664660525502],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_7bb1665c3367409c98e12a477775bb44 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_ee96171a6ea543ad85fc93ca50ffbf2e = $(`<div id="html_ee96171a6ea543ad85fc93ca50ffbf2e" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>2933</td>       <td>$2500</td>       <td>Rent me for the Super Bowl! 4100 square feet!</td>       <td>3 bedroom 3 bath house with gameroom and theat...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_7bb1665c3367409c98e12a477775bb44.setContent(html_ee96171a6ea543ad85fc93ca50ffbf2e);
+            
+
+            marker_5bc7b79e7c7b4e0eaeccaaa020de6b9c.bindPopup(popup_7bb1665c3367409c98e12a477775bb44)
+            ;
+
+            
+        
+    
+        var marker_6ef462ada7de4042b36b1c2d32725250 = L.marker(
+            [29.992924975918797, -95.1666788299016],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_a380d794d5234e5abaf547de2205d34b = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_41108eab839f44c1871c8992be67ebfe = $(`<div id="html_41108eab839f44c1871c8992be67ebfe" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>3117</td>       <td>$25</td>       <td>Newly Refurnished Cozy Room</td>       <td>Cozy bedroom with a queen size bed and connect...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_a380d794d5234e5abaf547de2205d34b.setContent(html_41108eab839f44c1871c8992be67ebfe);
+            
+
+            marker_6ef462ada7de4042b36b1c2d32725250.bindPopup(popup_a380d794d5234e5abaf547de2205d34b)
+            ;
+
+            
+        
+    
+        var marker_5258051693654c8cafc197b88c33e824 = L.marker(
+            [29.9858060578205, -95.19097920834909],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_5c2b7199196642b8b7f3bafdf736180a = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_9e0dc5c85f6040be9399b8678a1f9541 = $(`<div id="html_9e0dc5c85f6040be9399b8678a1f9541" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>3177</td>       <td>$94</td>       <td>CASA de Capucine honeymoon suite</td>       <td>CASA Capucine's honeymoon suite, in this 3-bed...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_5c2b7199196642b8b7f3bafdf736180a.setContent(html_9e0dc5c85f6040be9399b8678a1f9541);
+            
+
+            marker_5258051693654c8cafc197b88c33e824.bindPopup(popup_5c2b7199196642b8b7f3bafdf736180a)
+            ;
+
+            
+        
+    
+        var marker_7a3f5fc2378f4061ac775136b9400c61 = L.marker(
+            [29.988057740027298, -95.1710283013464],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_68218a00f6a24957b3baf209c22b0b2b = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_6c823405f6ae4630afb9b819332a973b = $(`<div id="html_6c823405f6ae4630afb9b819332a973b" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>3386</td>       <td>$1000</td>       <td>Beautiful Home for suberbowl</td>       <td>4 Bedroom home, 2 car garage, access to freeway</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_68218a00f6a24957b3baf209c22b0b2b.setContent(html_6c823405f6ae4630afb9b819332a973b);
+            
+
+            marker_7a3f5fc2378f4061ac775136b9400c61.bindPopup(popup_68218a00f6a24957b3baf209c22b0b2b)
+            ;
+
+            
+        
+    
+        var marker_7fc91ca5ef8346f99a35520b1acf6203 = L.marker(
+            [29.968873452978603, -95.1818540079541],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_40c0f658de1e4165b84ce3f345c78d8c = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_465aa120fb1b4771bde27184dc928a50 = $(`<div id="html_465aa120fb1b4771bde27184dc928a50" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>3398</td>       <td>$45</td>       <td>Eagle Springs Accomodation</td>       <td>My place is close to Houston George Bush Inter...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_40c0f658de1e4165b84ce3f345c78d8c.setContent(html_465aa120fb1b4771bde27184dc928a50);
+            
+
+            marker_7fc91ca5ef8346f99a35520b1acf6203.bindPopup(popup_40c0f658de1e4165b84ce3f345c78d8c)
+            ;
+
+            
+        
+    
+        var marker_68524a2d63414bde9fa0c7c82d28918f = L.marker(
+            [29.9991889585713, -95.1462113511237],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_b3e29df06fb74e82a9cf1b93c2107c1e = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_1c328b1a0b1d4dfb95c13c9443731777 = $(`<div id="html_1c328b1a0b1d4dfb95c13c9443731777" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>3440</td>       <td>$500</td>       <td>Upstairs living quarters.</td>       <td>Two separate bedrooms, one with a king size be...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_b3e29df06fb74e82a9cf1b93c2107c1e.setContent(html_1c328b1a0b1d4dfb95c13c9443731777);
+            
+
+            marker_68524a2d63414bde9fa0c7c82d28918f.bindPopup(popup_b3e29df06fb74e82a9cf1b93c2107c1e)
+            ;
+
+            
+        
+    
+        var marker_5627554e4ed741fda94f2deaed843304 = L.marker(
+            [29.9856092283635, -95.1963202958599],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_7df3d40bb50441fc81e14399af136acf = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_03be0e269e744a858a76c8f33e62d767 = $(`<div id="html_03be0e269e744a858a76c8f33e62d767" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>3589</td>       <td>$280</td>       <td>Reserve a stay at CASA de Capucine</td>       <td>This 3-bedroom, 2-bathroom house can comfortab...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_7df3d40bb50441fc81e14399af136acf.setContent(html_03be0e269e744a858a76c8f33e62d767);
+            
+
+            marker_5627554e4ed741fda94f2deaed843304.bindPopup(popup_7df3d40bb50441fc81e14399af136acf)
+            ;
+
+            
+        
+    
+        var marker_de3a6eb3335f49b79439e687f646bb4f = L.marker(
+            [29.9969585985108, -95.2627100343045],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_5896f67f680d48f69ed176d5e98b0c47 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_e47687147cde46a694c72a2a7ef12446 = $(`<div id="html_e47687147cde46a694c72a2a7ef12446" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>3948</td>       <td>$51</td>       <td>Cosy apt in downtown Humble</td>       <td>My place is close to Houston George Bush Inter...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_5896f67f680d48f69ed176d5e98b0c47.setContent(html_e47687147cde46a694c72a2a7ef12446);
+            
+
+            marker_de3a6eb3335f49b79439e687f646bb4f.bindPopup(popup_5896f67f680d48f69ed176d5e98b0c47)
+            ;
+
+            
+        
+    
+        var marker_99737499690a40ba992779959c150ebe = L.marker(
+            [29.957620706335803, -95.1667369006455],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_56b4963477104269b0219af84d439d87 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_ddf220a58fd04b68b0e3d5af8c02bbb3 = $(`<div id="html_ddf220a58fd04b68b0e3d5af8c02bbb3" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4010</td>       <td>$98</td>       <td>Appropriate Price For An Unforgetable Holiday</td>       <td>A very well decorated house for a family up to...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_56b4963477104269b0219af84d439d87.setContent(html_ddf220a58fd04b68b0e3d5af8c02bbb3);
+            
+
+            marker_99737499690a40ba992779959c150ebe.bindPopup(popup_56b4963477104269b0219af84d439d87)
+            ;
+
+            
+        
+    
+        var marker_dedcc7813336495782bf3cfec2d889c4 = L.marker(
+            [30.035156862765003, -95.17236348708859],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_602b9cffef20441a95397e3770707ebd = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_74652002fdd246b9b04b376707f01b8b = $(`<div id="html_74652002fdd246b9b04b376707f01b8b" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4033</td>       <td>$79</td>       <td>Kingwood Medical center</td>       <td>Charming 2 bedroom 2 Bathroom</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_602b9cffef20441a95397e3770707ebd.setContent(html_74652002fdd246b9b04b376707f01b8b);
+            
+
+            marker_dedcc7813336495782bf3cfec2d889c4.bindPopup(popup_602b9cffef20441a95397e3770707ebd)
+            ;
+
+            
+        
+    
+        var marker_836d5b13e4e14055997f3f792c818dd2 = L.marker(
+            [30.0182526261023, -95.11710018563379],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_e10125f88150482bbc85d5d710fae34a = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_6bb66cfbe4a74664a76f0f4ee08e8cd5 = $(`<div id="html_6bb66cfbe4a74664a76f0f4ee08e8cd5" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4146</td>       <td>$110</td>       <td>Room in Lake house on waterfront</td>       <td>I have this house listed as Large lake front h...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_e10125f88150482bbc85d5d710fae34a.setContent(html_6bb66cfbe4a74664a76f0f4ee08e8cd5);
+            
+
+            marker_836d5b13e4e14055997f3f792c818dd2.bindPopup(popup_e10125f88150482bbc85d5d710fae34a)
+            ;
+
+            
+        
+    
+        var marker_93bdf585db5340028420f7aafc82c08d = L.marker(
+            [29.9877053916148, -95.19435267207191],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_e1853db5614b49d68728eff53740606e = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_7cb567b3c293461e8c8aa2d9cc75d64b = $(`<div id="html_7cb567b3c293461e8c8aa2d9cc75d64b" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4179</td>       <td>$41</td>       <td>The corner room</td>       <td>This cool &amp;amp; comfortable room is centrally ...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_e1853db5614b49d68728eff53740606e.setContent(html_7cb567b3c293461e8c8aa2d9cc75d64b);
+            
+
+            marker_93bdf585db5340028420f7aafc82c08d.bindPopup(popup_e1853db5614b49d68728eff53740606e)
+            ;
+
+            
+        
+    
+        var marker_7fe0a2fec6b84f94bc2f53e705ff4071 = L.marker(
+            [29.985361866072804, -95.22998985395171],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_b3beb084642248b186e3ca46f425c2be = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_426111eb4aa34ea580073567f0393fa3 = $(`<div id="html_426111eb4aa34ea580073567f0393fa3" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4187</td>       <td>$117</td>       <td>Property in Houston-Golf Course View - IAH Air...</td>       <td>The best location, golf course view, a few min...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_b3beb084642248b186e3ca46f425c2be.setContent(html_426111eb4aa34ea580073567f0393fa3);
+            
+
+            marker_7fe0a2fec6b84f94bc2f53e705ff4071.bindPopup(popup_b3beb084642248b186e3ca46f425c2be)
+            ;
+
+            
+        
+    
+        var marker_13b76f41db9a4c779642c41ba21a9ff8 = L.marker(
+            [30.0105457700521, -95.1668727372568],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_2af9cd982eda4b57bfa76a0f8c6f3c1a = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_774cfae4b43745a0986f8a361cdf88eb = $(`<div id="html_774cfae4b43745a0986f8a361cdf88eb" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4192</td>       <td>$35</td>       <td>15 min from Bush Airport .</td>       <td>It's 4 bedroom house , I'm renting each room i...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_2af9cd982eda4b57bfa76a0f8c6f3c1a.setContent(html_774cfae4b43745a0986f8a361cdf88eb);
+            
+
+            marker_13b76f41db9a4c779642c41ba21a9ff8.bindPopup(popup_2af9cd982eda4b57bfa76a0f8c6f3c1a)
+            ;
+
+            
+        
+    
+        var marker_2e2ab1c021b54a149dba968a5379a4c8 = L.marker(
+            [29.924205888386396, -95.1678605709114],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_7d3d26788a5440c999f7cf0b000f0864 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_de065bc2ed2245da810c65bb853cf76b = $(`<div id="html_de065bc2ed2245da810c65bb853cf76b" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4274</td>       <td>$1600</td>       <td>Spacious and Comfortable</td>       <td>My place is close to the airport, family-frien...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_7d3d26788a5440c999f7cf0b000f0864.setContent(html_de065bc2ed2245da810c65bb853cf76b);
+            
+
+            marker_2e2ab1c021b54a149dba968a5379a4c8.bindPopup(popup_7d3d26788a5440c999f7cf0b000f0864)
+            ;
+
+            
+        
+    
+        var marker_9c94a859d6e54430aa81a20833905f2c = L.marker(
+            [30.0102346201717, -95.16684224562991],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_a41bf658f7b442458cb5f135d127e557 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_12008f1d0ad24a149ee4426d95dc46da = $(`<div id="html_12008f1d0ad24a149ee4426d95dc46da" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4302</td>       <td>$40</td>       <td>15 min from Bush Airport</td>       <td>15 min from Bush Airport and 35 min from Houst...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_a41bf658f7b442458cb5f135d127e557.setContent(html_12008f1d0ad24a149ee4426d95dc46da);
+            
+
+            marker_9c94a859d6e54430aa81a20833905f2c.bindPopup(popup_a41bf658f7b442458cb5f135d127e557)
+            ;
+
+            
+        
+    
+        var marker_829189de03e24d7eaadb5476608b2c2d = L.marker(
+            [30.010649092768997, -95.16272114402409],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_5fc8e49f4f9d484aa8e00ec37fa8cb73 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_dd235737327b454d88af57f79f8fd753 = $(`<div id="html_dd235737327b454d88af57f79f8fd753" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4318</td>       <td>$1250</td>       <td>4BR + 3.5 Bath Spacious Resort Home</td>       <td>Our resort home is great for couples, business...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_5fc8e49f4f9d484aa8e00ec37fa8cb73.setContent(html_dd235737327b454d88af57f79f8fd753);
+            
+
+            marker_829189de03e24d7eaadb5476608b2c2d.bindPopup(popup_5fc8e49f4f9d484aa8e00ec37fa8cb73)
+            ;
+
+            
+        
+    
+        var marker_1b534f24b10042d09f217a7d3f41412a = L.marker(
+            [29.9805549892207, -95.2008936446661],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_e4c15e39be1b4793b7ecaa6b2d4e1c5f = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_d149948b9b7a46e8b422219271c189d9 = $(`<div id="html_d149948b9b7a46e8b422219271c189d9" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4362</td>       <td>$2000</td>       <td>4br Home by IAH Superbowl Ready with Perks</td>       <td>My place is close to the airport and parks. Yo...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_e4c15e39be1b4793b7ecaa6b2d4e1c5f.setContent(html_d149948b9b7a46e8b422219271c189d9);
+            
+
+            marker_1b534f24b10042d09f217a7d3f41412a.bindPopup(popup_e4c15e39be1b4793b7ecaa6b2d4e1c5f)
+            ;
+
+            
+        
+    
+        var marker_c1177a837ff545308f3b5079c62c1cec = L.marker(
+            [30.0154760348806, -95.11737765928059],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_f9ec9b2d566d47c5a161a8de3c391ace = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_e9d173f18ac54d2f9bc7dd1603497722 = $(`<div id="html_e9d173f18ac54d2f9bc7dd1603497722" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4364</td>       <td>$285</td>       <td>Large Lake front home</td>       <td>This house was built in the 50's so it has its...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_f9ec9b2d566d47c5a161a8de3c391ace.setContent(html_e9d173f18ac54d2f9bc7dd1603497722);
+            
+
+            marker_c1177a837ff545308f3b5079c62c1cec.bindPopup(popup_f9ec9b2d566d47c5a161a8de3c391ace)
+            ;
+
+            
+        
+    
+        var marker_db7bb315252e4e928f169a63fc845ab6 = L.marker(
+            [30.006237979331697, -95.1913703161573],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_c2dcb546935940cda2281d14bff3d789 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_25cc861433434b53ad14a04d9a01f8ae = $(`<div id="html_25cc861433434b53ad14a04d9a01f8ae" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4394</td>       <td>$125</td>       <td>Perfect Place for the superbowl. Close to airport</td>       <td>My place is close to great views, parks, airpo...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_c2dcb546935940cda2281d14bff3d789.setContent(html_25cc861433434b53ad14a04d9a01f8ae);
+            
+
+            marker_db7bb315252e4e928f169a63fc845ab6.bindPopup(popup_c2dcb546935940cda2281d14bff3d789)
+            ;
+
+            
+        
+    
+        var marker_a0c8308352f942c3aaa8d0e610628ddd = L.marker(
+            [29.9793920732479, -95.2258262163957],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_a7b691a8fde94e868bd2d39714fbc7f3 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_b32ac1e3e4184090a92b0097880ef26e = $(`<div id="html_b32ac1e3e4184090a92b0097880ef26e" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4401</td>       <td>$500</td>       <td>Superbowl cozy! 4 Brd 2.5 bath!</td>       <td>A 4 bedroom 2.5 bathroom 5 min from Bush Inter...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_a7b691a8fde94e868bd2d39714fbc7f3.setContent(html_b32ac1e3e4184090a92b0097880ef26e);
+            
+
+            marker_a0c8308352f942c3aaa8d0e610628ddd.bindPopup(popup_a7b691a8fde94e868bd2d39714fbc7f3)
+            ;
+
+            
+        
+    
+        var marker_e4e0e256b0954f6589963b9d54b2fe8c = L.marker(
+            [29.993180786852196, -95.19257944175119],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_677f2ea1e12441cd931d070cfc24214e = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_443693529f774e37a76d3f0d05805028 = $(`<div id="html_443693529f774e37a76d3f0d05805028" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4519</td>       <td>$30</td>       <td>Comfortable family room w/ full bed</td>       <td>Nice quite Neighborhood, one room with full si...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_677f2ea1e12441cd931d070cfc24214e.setContent(html_443693529f774e37a76d3f0d05805028);
+            
+
+            marker_e4e0e256b0954f6589963b9d54b2fe8c.bindPopup(popup_677f2ea1e12441cd931d070cfc24214e)
+            ;
+
+            
+        
+    
+        var marker_7b4241823da3468aab043f3418cb6929 = L.marker(
+            [29.9198694915842, -95.1737887364233],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_551d8e9ed3a9462ca585b085bbca6a52 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_5df409cb9693405b9e0da3495d44c9b3 = $(`<div id="html_5df409cb9693405b9e0da3495d44c9b3" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4563</td>       <td>$3000</td>       <td>Super Bowl LI Weekend Rental</td>       <td>My place is close to the airport, the city cen...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_551d8e9ed3a9462ca585b085bbca6a52.setContent(html_5df409cb9693405b9e0da3495d44c9b3);
+            
+
+            marker_7b4241823da3468aab043f3418cb6929.bindPopup(popup_551d8e9ed3a9462ca585b085bbca6a52)
+            ;
+
+            
+        
+    
+        var marker_39fb397f42324825b07533d3368fb452 = L.marker(
+            [29.9382011028015, -95.2122711915037],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_8d77a708780e48e0a35f0c4fdea08987 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_3abd303781b340f2a45b289c0cfbc373 = $(`<div id="html_3abd303781b340f2a45b289c0cfbc373" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4626</td>       <td>$300</td>       <td>Stephen's Place</td>       <td>Cozy, family oriented, welcoming, homely, chil...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_8d77a708780e48e0a35f0c4fdea08987.setContent(html_3abd303781b340f2a45b289c0cfbc373);
+            
+
+            marker_39fb397f42324825b07533d3368fb452.bindPopup(popup_8d77a708780e48e0a35f0c4fdea08987)
+            ;
+
+            
+        
+    
+        var marker_79b0b9e2f77540bfa077777c9f284942 = L.marker(
+            [30.0044036832224, -95.1646758093595],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_8ed7aa53854746318d3ddd3be99049fc = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_38d408994f784323bb829cbe28f5f5e5 = $(`<div id="html_38d408994f784323bb829cbe28f5f5e5" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4760</td>       <td>$1900</td>       <td>2017 Super Bowl 4BR - 3.5Bath Spacious Home</td>       <td>4 spacious bedrooms, 3.5 baths, 2 living areas...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_8ed7aa53854746318d3ddd3be99049fc.setContent(html_38d408994f784323bb829cbe28f5f5e5);
+            
+
+            marker_79b0b9e2f77540bfa077777c9f284942.bindPopup(popup_8ed7aa53854746318d3ddd3be99049fc)
+            ;
+
+            
+        
+    
+        var marker_9f9df293fb0947668975abb1c559c579 = L.marker(
+            [29.911373119674398, -95.19733315807709],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_ec473462e4e24c63ba3be053cc4e61b4 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_54dcad80eafa4732b38dba9992af09f7 = $(`<div id="html_54dcad80eafa4732b38dba9992af09f7" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>4781</td>       <td>$1000</td>       <td>SUPERBOWL HOUSTON 15 minutes from IAH airport.</td>       <td>My place is close to restaurants and dining. Y...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_ec473462e4e24c63ba3be053cc4e61b4.setContent(html_54dcad80eafa4732b38dba9992af09f7);
+            
+
+            marker_9f9df293fb0947668975abb1c559c579.bindPopup(popup_ec473462e4e24c63ba3be053cc4e61b4)
+            ;
+
+            
+        
+    
+        var marker_c5c48a56e6da4926a1789c09adac5e4a = L.marker(
+            [30.0103918354683, -95.1597832919272],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_9a274c31833043fa959cc63b9c370456 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_22f652ee38a84087bd7ee058bbd23a5e = $(`<div id="html_22f652ee38a84087bd7ee058bbd23a5e" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5010</td>       <td>$55</td>       <td>Golf Villa Patio Home - master bedroom w/ smar...</td>       <td>neutral colors, plantation shutters, great pla...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_9a274c31833043fa959cc63b9c370456.setContent(html_22f652ee38a84087bd7ee058bbd23a5e);
+            
+
+            marker_c5c48a56e6da4926a1789c09adac5e4a.bindPopup(popup_9a274c31833043fa959cc63b9c370456)
+            ;
+
+            
+        
+    
+        var marker_15b2a8c633c94326a172a47d637f3201 = L.marker(
+            [29.997602325135798, -95.1475398924296],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_8b0d70c34c634ec680e5868a4ff107a0 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_0077a18eebaa46bb80b7297c431e7998 = $(`<div id="html_0077a18eebaa46bb80b7297c431e7998" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5138</td>       <td>$159</td>       <td>Spacious Living Near Lake Houston</td>       <td>My house is in a masterplanned community with ...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_8b0d70c34c634ec680e5868a4ff107a0.setContent(html_0077a18eebaa46bb80b7297c431e7998);
+            
+
+            marker_15b2a8c633c94326a172a47d637f3201.bindPopup(popup_8b0d70c34c634ec680e5868a4ff107a0)
+            ;
+
+            
+        
+    
+        var marker_6f0a82f6c1774c75a798c81acfdfde79 = L.marker(
+            [29.9875218663743, -95.14281220433729],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_570a8c30d3f94bc797c574966ddcdca0 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_a244c4f5cb86409585eb77b2cfaee54b = $(`<div id="html_a244c4f5cb86409585eb77b2cfaee54b" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5146</td>       <td>$75</td>       <td>A beautiful home on the golf course.</td>       <td>My place is close to the airport, parks, and t...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_570a8c30d3f94bc797c574966ddcdca0.setContent(html_a244c4f5cb86409585eb77b2cfaee54b);
+            
+
+            marker_6f0a82f6c1774c75a798c81acfdfde79.bindPopup(popup_570a8c30d3f94bc797c574966ddcdca0)
+            ;
+
+            
+        
+    
+        var marker_9a3c82be51c04c2a9cc28e1765d2d9d4 = L.marker(
+            [29.9839140141085, -95.1658891257748],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_238102d57cd6443da7d123333c928cd6 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_6ed3972b54254837909cec6f92a2eaf6 = $(`<div id="html_6ed3972b54254837909cec6f92a2eaf6" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5147</td>       <td>$90</td>       <td>Your Superbowl Home away from Home</td>       <td>15 minutes from IAH. 26 miles from Superbowl A...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_238102d57cd6443da7d123333c928cd6.setContent(html_6ed3972b54254837909cec6f92a2eaf6);
+            
+
+            marker_9a3c82be51c04c2a9cc28e1765d2d9d4.bindPopup(popup_238102d57cd6443da7d123333c928cd6)
+            ;
+
+            
+        
+    
+        var marker_ca55be5e01734c9fa759e1b6b0a0c0f2 = L.marker(
+            [29.929454284867898, -95.20295945632591],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_2faabe1c8bd24ee8b26d724aae1b3c7f = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_1c1cbd2576794348949197ad5f06f997 = $(`<div id="html_1c1cbd2576794348949197ad5f06f997" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5239</td>       <td>$500</td>       <td>Spacious 3BD Super Bowl retreat</td>       <td>Our place is 10 min from IAH and 25 min from t...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_2faabe1c8bd24ee8b26d724aae1b3c7f.setContent(html_1c1cbd2576794348949197ad5f06f997);
+            
+
+            marker_ca55be5e01734c9fa759e1b6b0a0c0f2.bindPopup(popup_2faabe1c8bd24ee8b26d724aae1b3c7f)
+            ;
+
+            
+        
+    
+        var marker_695f04ff19b843d08a744de9c4a0a729 = L.marker(
+            [30.007039548856, -95.1435474530086],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_1d16f7dae8114649afb8d4e9f6306147 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_df09d073bb9c447fa02e37fda3b2888b = $(`<div id="html_df09d073bb9c447fa02e37fda3b2888b" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5240</td>       <td>$50</td>       <td>On Lake Houston. Gated parking</td>       <td>Warm apartment right on lake Houston. Gated co...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_1d16f7dae8114649afb8d4e9f6306147.setContent(html_df09d073bb9c447fa02e37fda3b2888b);
+            
+
+            marker_695f04ff19b843d08a744de9c4a0a729.bindPopup(popup_1d16f7dae8114649afb8d4e9f6306147)
+            ;
+
+            
+        
+    
+        var marker_96e3a32e6f0c4072babe93ae7a45e049 = L.marker(
+            [29.9949849711018, -95.14611641115671],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_20de3b71a4bc4e0fbdbc1586848bfb5f = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_3a2bb96bc19d40ed8d5ae8d501b1c702 = $(`<div id="html_3a2bb96bc19d40ed8d5ae8d501b1c702" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5261</td>       <td>$49</td>       <td>湖边安静小区</td>       <td>My place is close to lake houston, golf course...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_20de3b71a4bc4e0fbdbc1586848bfb5f.setContent(html_3a2bb96bc19d40ed8d5ae8d501b1c702);
+            
+
+            marker_96e3a32e6f0c4072babe93ae7a45e049.bindPopup(popup_20de3b71a4bc4e0fbdbc1586848bfb5f)
+            ;
+
+            
+        
+    
+        var marker_776e27aa85d048ee89a6d2fccf043356 = L.marker(
+            [30.0127146628369, -95.19130193738859],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_81a5f512de7e4b4e8ed4114e1e1cfbbf = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_fd108d26e0114792b1763816f7d28d4e = $(`<div id="html_fd108d26e0114792b1763816f7d28d4e" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5269</td>       <td>$35</td>       <td>Master Bedroom with private Bathroom near IAH</td>       <td>NRG stadium located just 32 miles away, George...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_81a5f512de7e4b4e8ed4114e1e1cfbbf.setContent(html_fd108d26e0114792b1763816f7d28d4e);
+            
+
+            marker_776e27aa85d048ee89a6d2fccf043356.bindPopup(popup_81a5f512de7e4b4e8ed4114e1e1cfbbf)
+            ;
+
+            
+        
+    
+        var marker_1b3bab5c3e5d43bba015e9b712ec7490 = L.marker(
+            [29.9848173355831, -95.1698971901951],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_0c614b080b8b488283ad18096c3a092d = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_367c62f27b0f4a8d85d8f3eb6e2fce4d = $(`<div id="html_367c62f27b0f4a8d85d8f3eb6e2fce4d" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5299</td>       <td>$177</td>       <td>Your Stay Feels Like Home</td>       <td>Welcome to our home! We are located near Golf ...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_0c614b080b8b488283ad18096c3a092d.setContent(html_367c62f27b0f4a8d85d8f3eb6e2fce4d);
+            
+
+            marker_1b3bab5c3e5d43bba015e9b712ec7490.bindPopup(popup_0c614b080b8b488283ad18096c3a092d)
+            ;
+
+            
+        
+    
+        var marker_40c5c2ba50db4d008a8d3d0349a83894 = L.marker(
+            [29.9739463594964, -95.1822663708305],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_8f3b08010e4042e8b6ce82248c407af3 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_499c0eb5ae4b4900b50771f4e9d67e3b = $(`<div id="html_499c0eb5ae4b4900b50771f4e9d67e3b" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5319</td>       <td>$5000</td>       <td>The Littles Super Bowl Suite!</td>       <td>Welcome to the Littles NFL experience! A plush...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_8f3b08010e4042e8b6ce82248c407af3.setContent(html_499c0eb5ae4b4900b50771f4e9d67e3b);
+            
+
+            marker_40c5c2ba50db4d008a8d3d0349a83894.bindPopup(popup_8f3b08010e4042e8b6ce82248c407af3)
+            ;
+
+            
+        
+    
+        var marker_bbae4e40c7af4ba99e5e0c076e11530b = L.marker(
+            [29.996074820733, -95.1406650156607],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_3d01e68b2f34429b82a9016831dee7d5 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_6473e3369e0b462b8780eaf8207ae0ed = $(`<div id="html_6473e3369e0b462b8780eaf8207ae0ed" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5384</td>       <td>$1000</td>       <td>Super bowl home 20 min to downtown</td>       <td>Walking distance from lake Houston.</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_3d01e68b2f34429b82a9016831dee7d5.setContent(html_6473e3369e0b462b8780eaf8207ae0ed);
+            
+
+            marker_bbae4e40c7af4ba99e5e0c076e11530b.bindPopup(popup_3d01e68b2f34429b82a9016831dee7d5)
+            ;
+
+            
+        
+    
+        var marker_f06ec4c9e85c473ab0a29f6abc3bd510 = L.marker(
+            [30.035328409127498, -95.1735268940032],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_2d148e669d8b48dea6f337adc7adec41 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_a3a753124c0547e99faeca7e45d5faaf = $(`<div id="html_a3a753124c0547e99faeca7e45d5faaf" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5397</td>       <td>$79</td>       <td>Entire home 2BD&amp;2BATH + living room</td>       <td>This peaceful and comfy home is a great place ...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_2d148e669d8b48dea6f337adc7adec41.setContent(html_a3a753124c0547e99faeca7e45d5faaf);
+            
+
+            marker_f06ec4c9e85c473ab0a29f6abc3bd510.bindPopup(popup_2d148e669d8b48dea6f337adc7adec41)
+            ;
+
+            
+        
+    
+        var marker_559d6f31b5ca44719ca0035aeee8b149 = L.marker(
+            [30.0128473592139, -95.11436830969379],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_3cbf452712c5482089dffa5398522de1 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_f55d4c6efa1e4cdabbdc3108371d27eb = $(`<div id="html_f55d4c6efa1e4cdabbdc3108371d27eb" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5398</td>       <td>$45</td>       <td>Lake Houston Tiny Home Retreat</td>       <td>This is our 400 sq ft tiny house! Do you need ...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_3cbf452712c5482089dffa5398522de1.setContent(html_f55d4c6efa1e4cdabbdc3108371d27eb);
+            
+
+            marker_559d6f31b5ca44719ca0035aeee8b149.bindPopup(popup_3cbf452712c5482089dffa5398522de1)
+            ;
+
+            
+        
+    
+        var marker_d4a2e29c91a14ab88a718042bb96db8e = L.marker(
+            [29.978522343174802, -95.2271521691497],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_8b5ac5be703c45b3a54664728c490551 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_f89e098d5d9349ffa8cf8eeed50dee42 = $(`<div id="html_f89e098d5d9349ffa8cf8eeed50dee42" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5400</td>       <td>$167</td>       <td>Spacious two story home near IAH</td>       <td>Our red brick, cool, quiet home is minutes awa...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_8b5ac5be703c45b3a54664728c490551.setContent(html_f89e098d5d9349ffa8cf8eeed50dee42);
+            
+
+            marker_d4a2e29c91a14ab88a718042bb96db8e.bindPopup(popup_8b5ac5be703c45b3a54664728c490551)
+            ;
+
+            
+        
+    
+        var marker_2064b88aeefb44a8ab465df7f914f9ce = L.marker(
+            [30.0054443247446, -95.1697876936083],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_8eadc0f2e9e2478c970f4cd54452b186 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_615b00fbef97483298fb00156a526081 = $(`<div id="html_615b00fbef97483298fb00156a526081" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5452</td>       <td>$500</td>       <td>Room rental 20 minutes from DT hou</td>       <td>Spacious and quiet, our home is located a conv...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_8eadc0f2e9e2478c970f4cd54452b186.setContent(html_615b00fbef97483298fb00156a526081);
+            
+
+            marker_2064b88aeefb44a8ab465df7f914f9ce.bindPopup(popup_8eadc0f2e9e2478c970f4cd54452b186)
+            ;
+
+            
+        
+    
+        var marker_3893a5c157f8436291c7a37fa8926a36 = L.marker(
+            [29.9930803472509, -95.1957278369248],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_ee9e5acf0ceb4cb99175679cac520bb2 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_f9ee552aa07c4b39b43fc8d91b477d6e = $(`<div id="html_f9ee552aa07c4b39b43fc8d91b477d6e" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5460</td>       <td>$1500</td>       <td>Beautiful cozy 2 bedroom 2 bath</td>       <td>Beautiful 2 bedroom Apartment with 2 baths loc...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_ee9e5acf0ceb4cb99175679cac520bb2.setContent(html_f9ee552aa07c4b39b43fc8d91b477d6e);
+            
+
+            marker_3893a5c157f8436291c7a37fa8926a36.bindPopup(popup_ee9e5acf0ceb4cb99175679cac520bb2)
+            ;
+
+            
+        
+    
+        var marker_fe5800dddf4f4d2e90fa6b16aeeabc7b = L.marker(
+            [30.0352474963819, -95.1722478634273],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_df9e785311c541aaa79e747a96ca4b6b = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_706bcacbfa1d4b4fa5151319bf138394 = $(`<div id="html_706bcacbfa1d4b4fa5151319bf138394" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5461</td>       <td>$40</td>       <td>Private room in Kingwood!</td>       <td>Private room in Kingwood with private bathroom...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_df9e785311c541aaa79e747a96ca4b6b.setContent(html_706bcacbfa1d4b4fa5151319bf138394);
+            
+
+            marker_fe5800dddf4f4d2e90fa6b16aeeabc7b.bindPopup(popup_df9e785311c541aaa79e747a96ca4b6b)
+            ;
+
+            
+        
+    
+        var marker_abbbcc9a89244a51960bab79995c8e8b = L.marker(
+            [30.0312146293155, -95.15797056582942],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_b34a20937e8f4fedaf47649e4cc878b7 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_6ae2adcc6df441a08f2b28b079583e2d = $(`<div id="html_6ae2adcc6df441a08f2b28b079583e2d" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5481</td>       <td>$300</td>       <td>Lakeside Retreat</td>       <td>Enjoy our gorgeous, spacious guest suite on th...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_b34a20937e8f4fedaf47649e4cc878b7.setContent(html_6ae2adcc6df441a08f2b28b079583e2d);
+            
+
+            marker_abbbcc9a89244a51960bab79995c8e8b.bindPopup(popup_b34a20937e8f4fedaf47649e4cc878b7)
+            ;
+
+            
+        
+    
+        var marker_a0b7a6fefce140deacadcffa9a001b09 = L.marker(
+            [29.9825149927196, -95.1927154870775],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_1ac8a1645d3f4d779df061f7fd62553b = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_9692b1379d934f33984fbceb31d3eda0 = $(`<div id="html_9692b1379d934f33984fbceb31d3eda0" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5482</td>       <td>$675</td>       <td>Excellent proximity to Bush Intl. Airport</td>       <td>Couple(s), a family of 4, all ladies, but no A...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_1ac8a1645d3f4d779df061f7fd62553b.setContent(html_9692b1379d934f33984fbceb31d3eda0);
+            
+
+            marker_a0b7a6fefce140deacadcffa9a001b09.bindPopup(popup_1ac8a1645d3f4d779df061f7fd62553b)
+            ;
+
+            
+        
+    
+        var marker_d164b68b74504bf09ad536a147de3bec = L.marker(
+            [30.003328080948897, -95.1940411788283],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_385f267d6d8f4bb3b9b9ce8d8b589b41 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_296693d65aa04d5c9d68f30359a9de6d = $(`<div id="html_296693d65aa04d5c9d68f30359a9de6d" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5529</td>       <td>$55</td>       <td>Cozy &amp; Chic Home near IAH airport!</td>       <td>Enjoy a chic and cozy home in a quiet suburb. ...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_385f267d6d8f4bb3b9b9ce8d8b589b41.setContent(html_296693d65aa04d5c9d68f30359a9de6d);
+            
+
+            marker_d164b68b74504bf09ad536a147de3bec.bindPopup(popup_385f267d6d8f4bb3b9b9ce8d8b589b41)
+            ;
+
+            
+        
+    
+        var marker_a7a780fe40294e14a5811647fbdf936d = L.marker(
+            [30.0130808850206, -95.11372624613091],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_2d835c93cace4de1a2130c3cd20f5add = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_141d35053bda4afc8b9e43cfff00b5d7 = $(`<div id="html_141d35053bda4afc8b9e43cfff00b5d7" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5536</td>       <td>$110</td>       <td>Lake Houston Retreat</td>       <td>Relaxing home with gorgeous view of Lake Houst...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_2d835c93cace4de1a2130c3cd20f5add.setContent(html_141d35053bda4afc8b9e43cfff00b5d7);
+            
+
+            marker_a7a780fe40294e14a5811647fbdf936d.bindPopup(popup_2d835c93cace4de1a2130c3cd20f5add)
+            ;
+
+            
+        
+    
+        var marker_7dfdb4b7a9a74a83956c30969eaadb60 = L.marker(
+            [30.004368436375998, -95.19544538794091],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_cdfa84a8a4b14f1c9d15e22bae05d910 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_d455d116b7eb437db4833b4cf65de74d = $(`<div id="html_d455d116b7eb437db4833b4cf65de74d" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5549</td>       <td>$250</td>       <td>Superbowl home</td>       <td>Single family home near good eats. Close to do...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_cdfa84a8a4b14f1c9d15e22bae05d910.setContent(html_d455d116b7eb437db4833b4cf65de74d);
+            
+
+            marker_7dfdb4b7a9a74a83956c30969eaadb60.bindPopup(popup_cdfa84a8a4b14f1c9d15e22bae05d910)
+            ;
+
+            
+        
+    
+        var marker_3c90b1ab3ca54a9daee2363c78c12fee = L.marker(
+            [29.9866936050226, -95.17275353807351],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_b258b9a5f04e4bffb787a156bcd4ce54 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_8c1f5ad738314f2089e18527febc02dd = $(`<div id="html_8c1f5ad738314f2089e18527febc02dd" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5556</td>       <td>$1500</td>       <td>SuperBowl Stay</td>       <td>My place is close to the airport, nightlife, f...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_b258b9a5f04e4bffb787a156bcd4ce54.setContent(html_8c1f5ad738314f2089e18527febc02dd);
+            
+
+            marker_3c90b1ab3ca54a9daee2363c78c12fee.bindPopup(popup_b258b9a5f04e4bffb787a156bcd4ce54)
+            ;
+
+            
+        
+    
+        var marker_edb391defbd2460f8b256aa84cf39bd6 = L.marker(
+            [30.010131731750498, -95.186275062284],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_f25f439df84b42449426e1752056465c = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_c7119f07d1824b6e8ceef4f335bd4109 = $(`<div id="html_c7119f07d1824b6e8ceef4f335bd4109" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5571</td>       <td>$1750</td>       <td>Book my house for Super Bowl 2017</td>       <td>Rent my house for Super Bowl 2017! Close to Ge...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_f25f439df84b42449426e1752056465c.setContent(html_c7119f07d1824b6e8ceef4f335bd4109);
+            
+
+            marker_edb391defbd2460f8b256aa84cf39bd6.bindPopup(popup_f25f439df84b42449426e1752056465c)
+            ;
+
+            
+        
+    
+        var marker_0f2b4d6ba7194d4886e0bd5eeba4b70c = L.marker(
+            [29.9826298091798, -95.0901858827245],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_f5d48a9b99da4ddc86624227fd70e43b = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_133739c35008400d8b6704c0fd95c192 = $(`<div id="html_133739c35008400d8b6704c0fd95c192" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5649</td>       <td>$750</td>       <td>Four Pines Ranch Resort &amp; Weddings</td>       <td>The Barn at Four Pines Ranch. PERFECT FOR WEDD...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_f5d48a9b99da4ddc86624227fd70e43b.setContent(html_133739c35008400d8b6704c0fd95c192);
+            
+
+            marker_0f2b4d6ba7194d4886e0bd5eeba4b70c.bindPopup(popup_f5d48a9b99da4ddc86624227fd70e43b)
+            ;
+
+            
+        
+    
+        var marker_d1827beac8d24cb9b14ae3fad649b280 = L.marker(
+            [29.986575135415897, -95.19568602239849],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_9b1a75a5071e4566b8f01c3ffde7ea63 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_c46a1fb58f834504872cf7fde2ff3fd6 = $(`<div id="html_c46a1fb58f834504872cf7fde2ff3fd6" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5650</td>       <td>$27</td>       <td>5* Quality Private Room available near IAH</td>       <td>My place is close to the airport. You’ll love ...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_9b1a75a5071e4566b8f01c3ffde7ea63.setContent(html_c46a1fb58f834504872cf7fde2ff3fd6);
+            
+
+            marker_d1827beac8d24cb9b14ae3fad649b280.bindPopup(popup_9b1a75a5071e4566b8f01c3ffde7ea63)
+            ;
+
+            
+        
+    
+        var marker_b907db9da7fa4ca4988dd0f197349a5a = L.marker(
+            [29.9976090387988, -95.145715802603],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_9602570cabc84e0b80c0403c9ce51211 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_fc411bb52bff4bedbe9772609f0aa282 = $(`<div id="html_fc411bb52bff4bedbe9772609f0aa282" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5709</td>       <td>$299</td>       <td>湖边安静别墅</td>       <td>5 分钟可以走到湖边,安静的小区</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_9602570cabc84e0b80c0403c9ce51211.setContent(html_fc411bb52bff4bedbe9772609f0aa282);
+            
+
+            marker_b907db9da7fa4ca4988dd0f197349a5a.bindPopup(popup_9602570cabc84e0b80c0403c9ce51211)
+            ;
+
+            
+        
+    
+        var marker_809cf52e7d934703b77836d108a80c54 = L.marker(
+            [29.9404208366708, -95.20818149307459],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_3dec7296ebc54f91ab7ae11d3a399ba2 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_61b418ac65974e74975c988181c1b16b = $(`<div id="html_61b418ac65974e74975c988181c1b16b" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>5714</td>       <td>$300</td>       <td>Home Away From Home, (Large/Modern)</td>       <td>Welcome to Houston!!! Come Enjoy your home awa...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_3dec7296ebc54f91ab7ae11d3a399ba2.setContent(html_61b418ac65974e74975c988181c1b16b);
+            
+
+            marker_809cf52e7d934703b77836d108a80c54.bindPopup(popup_3dec7296ebc54f91ab7ae11d3a399ba2)
+            ;
+
+            
+        
+    
+        var marker_0112f3a20eb843eb875d2ffa97e04cd3 = L.marker(
+            [29.9341352107889, -95.1790200991828],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_cfd205cb91f94516bfa5b73d0ecf9dc2 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_8338ea443ac34518ad667c888a8a4d3c = $(`<div id="html_8338ea443ac34518ad667c888a8a4d3c" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>6125</td>       <td>$3000</td>       <td>The Super Bowl Peacock Retreat</td>       <td>Warm inviting 2500 square foot 3/2/2 home, des...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_cfd205cb91f94516bfa5b73d0ecf9dc2.setContent(html_8338ea443ac34518ad667c888a8a4d3c);
+            
+
+            marker_0112f3a20eb843eb875d2ffa97e04cd3.bindPopup(popup_cfd205cb91f94516bfa5b73d0ecf9dc2)
+            ;
+
+            
+        
+    
+        var marker_60095653bce343f6a56883d544bfe552 = L.marker(
+            [29.898611582867698, -95.21792594361371],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_1df5ee43b0d746abb55ae6b0c6ef3251 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_d0cba0b848e54787b506ff9c3a81606e = $(`<div id="html_d0cba0b848e54787b506ff9c3a81606e" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>6324</td>       <td>$250</td>       <td>Close to IAH airport and 15 min. from downtown.</td>       <td>Cozy home is close to IAH airport, Lake Housto...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_1df5ee43b0d746abb55ae6b0c6ef3251.setContent(html_d0cba0b848e54787b506ff9c3a81606e);
+            
+
+            marker_60095653bce343f6a56883d544bfe552.bindPopup(popup_1df5ee43b0d746abb55ae6b0c6ef3251)
+            ;
+
+            
+        
+    
+        var marker_ccfb5670ff654c29b988efdbe4a7977f = L.marker(
+            [29.9313906934439, -95.2026148840781],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_167ac035881d44b89b12f94509cc792e = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_10323dfee75e4d29a18fc225d1077e8c = $(`<div id="html_10323dfee75e4d29a18fc225d1077e8c" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>6677</td>       <td>$500</td>       <td>Houston Texas, Superbowl</td>       <td>My place is 10 minutes away from George Bush I...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_167ac035881d44b89b12f94509cc792e.setContent(html_10323dfee75e4d29a18fc225d1077e8c);
+            
+
+            marker_ccfb5670ff654c29b988efdbe4a7977f.bindPopup(popup_167ac035881d44b89b12f94509cc792e)
+            ;
+
+            
+        
+    
+        var marker_8151c60042f54b3db51e0b9e9e12e79a = L.marker(
+            [29.9659679122186, -95.1649005559153],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_cfbcc21dc35749948ea443867f0caa2a = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_2a955d875ea94bba82f7673597298f80 = $(`<div id="html_2a955d875ea94bba82f7673597298f80" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>9271</td>       <td>$74</td>       <td>Vudo</td>       <td>My place is close to restaurants and dining an...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_cfbcc21dc35749948ea443867f0caa2a.setContent(html_2a955d875ea94bba82f7673597298f80);
+            
+
+            marker_8151c60042f54b3db51e0b9e9e12e79a.bindPopup(popup_cfbcc21dc35749948ea443867f0caa2a)
+            ;
+
+            
+        
+    
+        var marker_1f608e561e5c4d2584c33844b765a551 = L.marker(
+            [29.9569577349907, -95.17458200720729],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_c4756c4656be4951a4a8e9e7f985c45b = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_aa14f9b58fa3493cad596bf2dbfbe4bc = $(`<div id="html_aa14f9b58fa3493cad596bf2dbfbe4bc" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>9340</td>       <td>$1500</td>       <td>Charming Super Bowl Home close to airport!</td>       <td>Rent me for the Super Bowl! You will be 15 min...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_c4756c4656be4951a4a8e9e7f985c45b.setContent(html_aa14f9b58fa3493cad596bf2dbfbe4bc);
+            
+
+            marker_1f608e561e5c4d2584c33844b765a551.bindPopup(popup_c4756c4656be4951a4a8e9e7f985c45b)
+            ;
+
+            
+        
+    
+        var marker_7617f45ddb9143c69933906d4fe25504 = L.marker(
+            [29.936234124172696, -95.26261767968658],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_47b40fcc722643b1a6999883fcfef3c5 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_02677fb9d8dd4ef5b5c78f7342c9fb2b = $(`<div id="html_02677fb9d8dd4ef5b5c78f7342c9fb2b" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>9409</td>       <td>$23</td>       <td>Home away from Home.</td>       <td>My best friend is my co-host &amp;amp; she runs it...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_47b40fcc722643b1a6999883fcfef3c5.setContent(html_02677fb9d8dd4ef5b5c78f7342c9fb2b);
+            
+
+            marker_7617f45ddb9143c69933906d4fe25504.bindPopup(popup_47b40fcc722643b1a6999883fcfef3c5)
+            ;
+
+            
+        
+    
+        var marker_a3889d47964c4f4e97b402d26f926e54 = L.marker(
+            [29.9652067168884, -95.1897048297379],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_45f1d3e9a2004b7e952f389a3d606740 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_175b5ebe78524fffb1e49e75de4c10cf = $(`<div id="html_175b5ebe78524fffb1e49e75de4c10cf" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>9491</td>       <td>$50</td>       <td>50/night-George Bush Airport</td>       <td>Eagle Springs is located at Will Clayton, offe...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_45f1d3e9a2004b7e952f389a3d606740.setContent(html_175b5ebe78524fffb1e49e75de4c10cf);
+            
+
+            marker_a3889d47964c4f4e97b402d26f926e54.bindPopup(popup_45f1d3e9a2004b7e952f389a3d606740)
+            ;
+
+            
+        
+    
+        var marker_673aa0fc445f48658cd9828cac78780f = L.marker(
+            [29.9344082971423, -95.2327034427981],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_b4ebc7a51aa54fba93a4e53206eb6e33 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_9a33ccc6c1dd4f6b9cffe64e050d8fe8 = $(`<div id="html_9a33ccc6c1dd4f6b9cffe64e050d8fe8" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>10099</td>       <td>$450</td>       <td>2017 Superbowl Rental 2 Bedroom Apt (IAH)</td>       <td>6 people MAX (no exceptions)\nLocation:\nNRG S...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_b4ebc7a51aa54fba93a4e53206eb6e33.setContent(html_9a33ccc6c1dd4f6b9cffe64e050d8fe8);
+            
+
+            marker_673aa0fc445f48658cd9828cac78780f.bindPopup(popup_b4ebc7a51aa54fba93a4e53206eb6e33)
+            ;
+
+            
+        
+    
+        var marker_3a4e7f3da486472895aacc44d907c8be = L.marker(
+            [29.941549154677897, -95.250319039212],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_9e722dc6ccb14a0fa2cff58c90b2d009 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_a886216e0e5f4da29b9ed2c645e2ad35 = $(`<div id="html_a886216e0e5f4da29b9ed2c645e2ad35" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>10189</td>       <td>$165</td>       <td>Houston Area- Spacious Family Home</td>       <td>Our 4 bedroom home boats a Master Bedroom, a S...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_9e722dc6ccb14a0fa2cff58c90b2d009.setContent(html_a886216e0e5f4da29b9ed2c645e2ad35);
+            
+
+            marker_3a4e7f3da486472895aacc44d907c8be.bindPopup(popup_9e722dc6ccb14a0fa2cff58c90b2d009)
+            ;
+
+            
+        
+    
+        var marker_ee68e9fa37d649b8852fea009b845673 = L.marker(
+            [29.960869928233, -95.1669690981854],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_321bec58286e4221850d28c93be29d04 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_f1b4d42253fb43fc9a6c946dc41fd472 = $(`<div id="html_f1b4d42253fb43fc9a6c946dc41fd472" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>11329</td>       <td>$79</td>       <td>Luxurious getaway master bedroom</td>       <td>Beautiful master bedroom and master bath w sep...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_321bec58286e4221850d28c93be29d04.setContent(html_f1b4d42253fb43fc9a6c946dc41fd472);
+            
+
+            marker_ee68e9fa37d649b8852fea009b845673.bindPopup(popup_321bec58286e4221850d28c93be29d04)
+            ;
+
+            
+        
+    
+        var marker_ef8b06c65b1646e5bf1cf06f9f776372 = L.marker(
+            [29.9627205336553, -95.1737489018466],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+            var popup_d2c86a5fe6ac48238431f601d5cef061 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_553f5fae7a4e41fdbd70d457ced64082 = $(`<div id="html_553f5fae7a4e41fdbd70d457ced64082" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe table">   <thead>     <tr style="text-align: center;">       <th>Doc-Nr</th>       <th>Rate</th>       <th>Title</th>       <th>Description</th>     </tr>   </thead>   <tbody>     <tr>       <td>11454</td>       <td>$350</td>       <td>Exellent proximity to IAH and NRG Stadium</td>       <td>My place is good for couples, solo adventurers...</td>     </tr>   </tbody> </table></div>`)[0];
+                popup_d2c86a5fe6ac48238431f601d5cef061.setContent(html_553f5fae7a4e41fdbd70d457ced64082);
+            
+
+            marker_ef8b06c65b1646e5bf1cf06f9f776372.bindPopup(popup_d2c86a5fe6ac48238431f601d5cef061)
+            ;
+
+            
+        
+    
+        var marker_58dc827cb9b94588a50a017ad56c1e86 = L.marker(
+            [29.95468008778, -95.176070286],
+            {
+                icon: new L.Icon.Default()
+                }
+            ).addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+        
+    
+
+                var icon_1df21481e16041c9aec549a7514b2f48 = L.AwesomeMarkers.icon({
+                    icon: 'cloud',
+                    iconColor: 'white',
+                    markerColor: 'green',
+                    prefix: 'glyphicon',
+                    extraClasses: 'fa-rotate-0'
+                    });
+                marker_58dc827cb9b94588a50a017ad56c1e86.setIcon(icon_1df21481e16041c9aec549a7514b2f48);
+            
+    
+            var popup_73ac6ae4e1f74fb68c748fa2b17cb8b4 = L.popup({maxWidth: '300'
+            
+            });
+
+            
+                var html_1850b1ee640e47f79d5a474331168faa = $(`<div id="html_1850b1ee640e47f79d5a474331168faa" style="width: 100.0%; height: 100.0%;">Center</div>`)[0];
+                popup_73ac6ae4e1f74fb68c748fa2b17cb8b4.setContent(html_1850b1ee640e47f79d5a474331168faa);
+            
+
+            marker_58dc827cb9b94588a50a017ad56c1e86.bindPopup(popup_73ac6ae4e1f74fb68c748fa2b17cb8b4)
+            ;
+
+            
+        
+    
+
+            var circle_37d3555ed1dc4dfd8a56353240e1e5b3 = L.circle(
+                [29.95468008778, -95.176070286],
+                {
+  "bubblingMouseEvents": true,
+  "color": "white",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "blue",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "lineCap": "round",
+  "lineJoin": "round",
+  "opacity": 1.0,
+  "radius": 10000.0,
+  "stroke": true,
+  "weight": 3
+}
+                )
+                .addTo(map_a4ab70c02f1d4252a9a6a0685d1bd9be);
+            
+</script>
