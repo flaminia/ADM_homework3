@@ -3,7 +3,7 @@
 
 Sapienza course semester 2, 2018
 
-Group 3 homework assignment of the group members: Michael Aichmueller, Flaminia Matteucci and Muhammad Anwar Alam
+Group 12 composed by : Michael Aichmueller, Flaminia Matteucci and Muhammad Anwar Alam
 
 The folder homework 3 contains all the files for the homework of assignment 3. Inside this folder are:
 
